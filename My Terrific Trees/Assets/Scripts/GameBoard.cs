@@ -7,7 +7,7 @@ public class GameBoard : MonoBehaviour
     public Transform ground;
     public Vector2Int size;
     public GameTile tilePrefab;
-    private GameTile[] tileArray;
+    public GameTile[] tileArray;
 
     void Awake()
     {
@@ -19,14 +19,14 @@ public class GameBoard : MonoBehaviour
         tileArray = new GameTile[size.x * size.y];
 
         //create a tile at each unit on the game board
-        for (int y = 0; y < size.y; ++y)
+        for (int y = 0; y < size.y; y++)
         {
-            for (int x = 0; x < size.x; ++x)
+            for (int x = 0; x < size.x; x++)
             {
                 GameTile tile = Instantiate(tilePrefab);
                 tile.transform.SetParent(transform, false);
                 tile.transform.localPosition = new Vector3(x - offset.x, 0f, y - offset.y);
-                tileArray[(size.y * y) + x] = tile;
+                tileArray[(size.x * y) + x] = tile;
             }
         }
     }

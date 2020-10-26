@@ -341,6 +341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   treePrefab: {fileID: 7703706539017720594, guid: 400c23db7e3094c45a9083337228074f, type: 3}
+  remainingTrees: 25
 --- !u!4 &1161573549
 Transform:
   m_ObjectHideFlags: 0
@@ -387,6 +388,7 @@ MonoBehaviour:
   ground: {fileID: 433245263}
   size: {x: 5, y: 5}
   tilePrefab: {fileID: 1335097049985917919, guid: d61a410e18c7b624abb9e4d8bd7f1662, type: 3}
+  tileArray: []
 --- !u!4 &1469262542
 Transform:
   m_ObjectHideFlags: 0
