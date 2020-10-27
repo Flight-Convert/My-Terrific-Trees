@@ -4,19 +4,23 @@
  * Places a sapling wherever the player clicks
  */
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TreePlanter : MonoBehaviour
 {
     public GameObject treePrefab;
     public int remainingTrees = 5;
+    public Text treeCountText;
 
     GameBoard board;
+
 
     // Start is called before the first frame update
     void Start()
     {
         board = FindObjectOfType<GameBoard>();
-        if (treePrefab == null) Debug.LogWarning("No tree prefab set. Will throw error if TreePlanter tries to plant a tree");
+        if (treePrefab == null) Debug.LogWarning("No tree prefab set. Will throw error if TreePlanter tries to plant a tree.");
+        if (treeCountText == null) Debug.LogWarning("No tree count text is set. There is no UI keeping track of remaining trees.");
     }
 
     // Update is called once per frame
@@ -27,9 +31,14 @@ public class TreePlanter : MonoBehaviour
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -10));
             Vector2Int mouseTile = new Vector2Int((int)Mathf.Round(mousePos.x), (int)Mathf.Round(mousePos.z));
 
-            //if (remainingTrees > 0)
+            if (remainingTrees > 0)
                 PlantTreeOnTile(mouseTile);
+            else
+                Debug.Log("You are out of trees!");
         }
+
+        if (treeCountText != null)
+           treeCountText.text = "Trees Remaining: " + remainingTrees;
     }
 
     public void PlantTreeOnTile(Vector2Int tileCoordinates)
@@ -48,7 +57,11 @@ public class TreePlanter : MonoBehaviour
         Transform tile = board.tileArray[tileX + board.size.x* tileY].transform;
 
         /// Plant the tree
-        Instantiate(treePrefab, tile);
-        remainingTrees--;
+        if (tile.childCount < 2)
+        {
+            Instantiate(treePrefab, tile);
+            remainingTrees--;
+        }
+        
     }
 }
