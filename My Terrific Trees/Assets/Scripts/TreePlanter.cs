@@ -32,7 +32,10 @@ public class TreePlanter : MonoBehaviour
             Vector2Int mouseTile = new Vector2Int((int)Mathf.Round(mousePos.x), (int)Mathf.Round(mousePos.z));
 
             if (remainingTrees > 0)
+            {
                 PlantTreeOnTile(mouseTile);
+                Debug.Log("mouseTile Coords at plant: " + mouseTile);
+            }
             else
                 Debug.Log("You are out of trees!");
         }
