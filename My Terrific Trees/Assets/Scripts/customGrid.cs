@@ -4,17 +4,25 @@ using UnityEngine;
 
 public class customGrid : MonoBehaviour
 {
-    public GameObject target;
-    public GameObject structure;
-    Vector3 truePos;
+    public GameObject[] targets;
     public float gridSize;
+
+    void Start()
+    {
+        targets = GameObject.FindGameObjectsWithTag("Griddable");
+    }
 
     void LateUpdate()
     {
-        truePos.x = Mathf.Floor(target.transform.position.x / gridSize) * gridSize;
-        truePos.y = Mathf.Floor(target.transform.position.y / gridSize) * gridSize;
-        truePos.z = Mathf.Floor(target.transform.position.z / gridSize) * gridSize;
+        for (int i = 0; i < targets.Length; ++i)
+        {
+            Vector3 truePos;
 
-        structure.transform.position = truePos;
+            truePos.x = Mathf.Floor(targets[i].transform.position.x / gridSize) * gridSize;
+            truePos.y = Mathf.Floor(targets[i].transform.position.y / gridSize) * gridSize;
+            truePos.z = Mathf.Floor(targets[i].transform.position.z / gridSize) * gridSize;
+
+            targets[i].transform.position = truePos;
+        }
     }
 }
