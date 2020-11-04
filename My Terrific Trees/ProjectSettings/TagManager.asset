@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Griddable
+  - Tree
   layers:
   - Default
   - TransparentFX
