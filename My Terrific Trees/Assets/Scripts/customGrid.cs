@@ -18,9 +18,9 @@ public class customGrid : MonoBehaviour
         {
             Vector3 truePos;
 
-            truePos.x = Mathf.Floor(targets[i].transform.position.x / gridSize) * gridSize;
-            truePos.y = Mathf.Floor(targets[i].transform.position.y / gridSize) * gridSize;
-            truePos.z = Mathf.Floor(targets[i].transform.position.z / gridSize) * gridSize;
+            truePos.x = Mathf.Round(targets[i].transform.position.x / gridSize) * gridSize;
+            truePos.y = Mathf.Round(targets[i].transform.position.y / gridSize) * gridSize;
+            truePos.z = Mathf.Round(targets[i].transform.position.z / gridSize) * gridSize;
 
             targets[i].transform.position = truePos;
         }
