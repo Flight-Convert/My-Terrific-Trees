@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿/*
+ * Liam Barrett
+ * Project 4-7 | My Terrific Trees
+ * Makes trees grow over time
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿/*
+ * Liam Barrett
+ * Project 4-7 | My Terrific Trees
+ * Script for selection indicator to follow mouse position
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +16,9 @@ public class followMouse : MonoBehaviour
     {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.y = 0;
-        transform.position = mousePos;
+        if (mousePos.x <= 5 && mousePos.x >= -5 && mousePos.z <= 5 && mousePos.z >= -5)
+        {
+            transform.position = mousePos;
+        }
     }
 }

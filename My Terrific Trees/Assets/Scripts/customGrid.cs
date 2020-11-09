@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿/*
+ * Liam Barrett
+ * Project 4-7 | My Terrific Trees
+ * Locks griddable objects to grid-based movement
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
