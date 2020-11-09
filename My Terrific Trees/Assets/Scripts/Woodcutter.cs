@@ -58,14 +58,14 @@ public class Woodcutter : MonoBehaviour
             //CheckforTree()
 
             //if treeInSight = true
+            //set currentMovement = direciton of tree for next line where move
 
             //Do movement forward check
             //MovementCheckForward(currentMovement);
-            
 
-             
+            //goFowards
             //doMovement("auto");
-            //goFoward;
+
         }
         else
         {
