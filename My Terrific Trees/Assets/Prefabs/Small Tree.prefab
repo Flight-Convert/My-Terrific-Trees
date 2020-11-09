@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 7703706539017720605}
   - component: {fileID: -7852176693618790550}
   m_Layer: 0
-  m_Name: Sapling
-  m_TagString: Sapling
+  m_Name: Small Tree
+  m_TagString: Small Tree
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 5ad0b6a0516e4bf4994e2b4ea009de60, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 791e71848fbd467448f1512c17394cfd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -95,5 +95,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cf4ecb9824d42e458cd5eb20a8ad02c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smallTreePrefab: {fileID: 7703706539017720594, guid: b110cead02c03394e9138c3865f41d77, type: 3}
+  smallTreePrefab: {fileID: 7703706539017720594}
   bigTreePrefab: {fileID: 7703706539017720594, guid: 74463d6c490960e48acf218a84a66bd8, type: 3}

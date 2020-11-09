@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Griddable
   - Tree
+  - Sapling
+  - Small Tree
   layers:
   - Default
   - TransparentFX
