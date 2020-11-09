@@ -23,7 +23,9 @@ public class CheckTreeCount : MonoBehaviour
     {
         if (tp.remainingTrees <= 0)
         {
-            int numTrees = GameObject.FindGameObjectsWithTag("Tree").Length;
+            int numTrees = GameObject.FindGameObjectsWithTag("Tree").Length
+                + GameObject.FindGameObjectsWithTag("Sapling").Length
+                + GameObject.FindGameObjectsWithTag("Small Tree").Length;
             if (numTrees == 0)
             {
                 if (!lost)

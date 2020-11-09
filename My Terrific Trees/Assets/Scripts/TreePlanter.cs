@@ -46,8 +46,8 @@ public class TreePlanter : MonoBehaviour
     public void PlantTreeOnTile(Vector2Int tileCoordinates)
     {
         /// Player clicked off of the grid, don't try to plant a tree
-        if (tileCoordinates.x < -boardSize.x / 2 || tileCoordinates.x > boardSize.x / 2) return;
-        if (tileCoordinates.y < -boardSize.y / 2 || tileCoordinates.y > boardSize.y / 2) return;
+        if (tileCoordinates.x <= -boardSize.x / 2 || tileCoordinates.x > boardSize.x / 2) return;
+        if (tileCoordinates.y <= -boardSize.y / 2 || tileCoordinates.y > boardSize.y / 2) return;
 
         /// Check if tree is already planted at this spot
         if (true) 
