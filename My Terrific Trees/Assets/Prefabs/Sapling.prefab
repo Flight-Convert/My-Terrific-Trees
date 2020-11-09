@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7703706539017720604}
   - component: {fileID: 7703706539017720605}
+  - component: {fileID: 8407459750174007633}
   m_Layer: 0
   m_Name: Sapling
   m_TagString: Tree
@@ -82,3 +83,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &8407459750174007633
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7703706539017720594}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.18138766, y: 0.2344178, z: 0.20000012}
+  m_Center: {x: -0.007709801, y: -0.01967341, z: 5.753143e-17}

@@ -6,6 +6,12 @@ TagManager:
   tags:
   - Griddable
   - Tree
+  - Edge
+  - Outside
+  - EyeUp
+  - EyeDown
+  - EyeLeft
+  - EyeRight
   layers:
   - Default
   - TransparentFX
