@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 383744415}
   - component: {fileID: 383744414}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: Selection Icon
   m_TagString: Griddable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

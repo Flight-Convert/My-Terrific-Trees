@@ -12,16 +12,26 @@ public class TreeGrower : MonoBehaviour
     public GameObject smallTreePrefab;
     public GameObject bigTreePrefab;
 
+    [HideInInspector] public int turnPlanted;
+    [HideInInspector] public int turnsSincePlanted;
+
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine("GrowTree");
+        turnPlanted = TurnManager.instance.turnCount;
     }
 
-    IEnumerator GrowTree()
+    private void Update()
     {
-        yield return new WaitForSeconds(10);
+        turnsSincePlanted = turnPlanted - TurnManager.instance.turnCount;
+        if (turnsSincePlanted == 2)
+        {
+            GrowTree();
+        }
+    }
 
+    private void GrowTree()
+    {
         if (gameObject.CompareTag("Sapling"))
         {
             Instantiate(smallTreePrefab, transform.position, transform.rotation);
@@ -32,5 +42,4 @@ public class TreeGrower : MonoBehaviour
         }
         Destroy(gameObject);
     }
-
 }
