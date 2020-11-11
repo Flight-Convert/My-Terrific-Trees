@@ -12,8 +12,8 @@ public class TreeGrower : MonoBehaviour
     public GameObject smallTreePrefab;
     public GameObject bigTreePrefab;
 
-    [HideInInspector] public int turnPlanted;
-    [HideInInspector] public int turnsSincePlanted;
+    public int turnPlanted;
+    public int turnsSincePlanted;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +23,7 @@ public class TreeGrower : MonoBehaviour
 
     private void Update()
     {
-        turnsSincePlanted = turnPlanted - TurnManager.instance.turnCount;
+        turnsSincePlanted = TurnManager.instance.turnCount - turnPlanted;
         if (turnsSincePlanted == 2)
         {
             GrowTree();

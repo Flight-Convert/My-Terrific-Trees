@@ -40,6 +40,14 @@ public class TurnManager : MonoBehaviour
         isPlayerTurn = true;
     }
 
+    private void Update()
+    {
+        if (!isPlayerTurn)
+        {
+            startTurn();
+        }
+    }
+
     public void endTurn()
     {
         isPlayerTurn = false;
