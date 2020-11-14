@@ -40,6 +40,15 @@ public class TurnManager : MonoBehaviour
         isPlayerTurn = true;
     }
 
+    //update is for testing the Turn Manager. Delete this after woodcutters are implemented
+    private void Update()
+    {
+        if (!isPlayerTurn)
+        {
+            startTurn();
+        }
+    }
+
     public void endTurn()
     {
         isPlayerTurn = false;
