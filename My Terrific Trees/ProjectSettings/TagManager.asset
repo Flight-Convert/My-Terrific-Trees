@@ -8,6 +8,14 @@ TagManager:
   - Tree
   - Sapling
   - Small Tree
+  - Edge
+  - Outside
+  - EyeRight
+  - EyeLeft
+  - EyeDown
+  - EyeUp
+  - Big Tree
+  - WCHitbox
   layers:
   - Default
   - TransparentFX

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7703706539017720605}
   - component: {fileID: 8407459750174007633}
   - component: {fileID: -6556749639343935988}
-  - component: {fileID: 240133057157720127}
   - component: {fileID: 787894376307516154}
   m_Layer: 0
   m_Name: Sapling
@@ -115,19 +114,6 @@ MonoBehaviour:
   bigTreePrefab: {fileID: 7703706539017720594, guid: 74463d6c490960e48acf218a84a66bd8, type: 3}
   turnPlanted: 0
   turnsSincePlanted: 0
---- !u!114 &240133057157720127
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7703706539017720594}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b7970f82e1a6349b4dc229bfc9902c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TreeSound: {fileID: 0}
 --- !u!82 &787894376307516154
 AudioSource:
   m_ObjectHideFlags: 0

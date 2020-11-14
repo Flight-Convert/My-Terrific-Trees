@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 7703706539017720604}
   - component: {fileID: 7703706539017720605}
   - component: {fileID: -7852176693618790550}
-  - component: {fileID: -8520361963287822548}
   - component: {fileID: 2777039374681818845}
+  - component: {fileID: 2851444350551383367}
   m_Layer: 0
   m_Name: Small Tree
   m_TagString: Small Tree
@@ -101,19 +101,6 @@ MonoBehaviour:
   bigTreePrefab: {fileID: 7703706539017720594, guid: 74463d6c490960e48acf218a84a66bd8, type: 3}
   turnPlanted: 0
   turnsSincePlanted: 0
---- !u!114 &-8520361963287822548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7703706539017720594}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b7970f82e1a6349b4dc229bfc9902c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TreeSound: {fileID: 0}
 --- !u!82 &2777039374681818845
 AudioSource:
   m_ObjectHideFlags: 0
@@ -210,3 +197,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!65 &2851444350551383367
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7703706539017720594}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.24441421, y: 0.26986414, z: 0.20000012}
+  m_Center: {x: -0.00052009523, y: -0.009397656, z: 2.2526444e-17}

@@ -12,6 +12,9 @@ public class TreeGrower : MonoBehaviour
     public GameObject smallTreePrefab;
     public GameObject bigTreePrefab;
 
+    //For use in Inspector Debugging only!!!
+    public bool makeGrow = false;
+
     [HideInInspector] public int turnPlanted;
     [HideInInspector] public int turnsSincePlanted;
 
@@ -27,6 +30,13 @@ public class TreeGrower : MonoBehaviour
         if (turnsSincePlanted == 2)
         {
             GrowTree();
+        }
+        
+        //For use in Inspector Debugging only!!!
+        if(makeGrow == true)
+        {
+            GrowTree();
+            makeGrow = false;
         }
     }
 
