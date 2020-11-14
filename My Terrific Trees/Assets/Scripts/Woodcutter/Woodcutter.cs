@@ -18,7 +18,7 @@ public class Woodcutter : MonoBehaviour
     public int copyMoveIndex = 0; //Where in list we are
     private int patternListLength;
 
-    public bool readyToMove = false;
+    //public bool readyToMove = false;
 
     public Rigidbody cutterRB;
     //public Rigidbody checkRB;
@@ -76,9 +76,12 @@ public class Woodcutter : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //* Outdated implementation
-        //Debug.Log(checkMoveDown.whatsHere); //dont get through refernce, have outer triggerzones change data in this script to fix references
-        //Call a method to update data collection for use in formulas
+        /*if(!TurnManager.instance.isPlayerTurn)
+        {
+            TurnManager.instance.
+            //readyToMove = true;
+        }*/
+        
 
         //*Debug Display of what the eye check is seeing
         Debug.Log("TopEye: " + topEyeData);
@@ -94,7 +97,7 @@ public class Woodcutter : MonoBehaviour
         }
 
         //If on board and ready to move
-        if (readyToMove)
+        if (!TurnManager.instance.isPlayerTurn)
         {
             //Figure out Movement First
             if (copyMoveIndex == patternListLength)
@@ -108,8 +111,7 @@ public class Woodcutter : MonoBehaviour
                       
             doMovement(goingDirection);
 
-            readyToMove = false;
-            //copyMoveIndex += 1; in method
+            TurnManager.instance.startTurn();
 
         }
         else
@@ -208,8 +210,9 @@ public class Woodcutter : MonoBehaviour
             else
             {
                 goingDirection = Direction;
+                copyMoveIndex += 1;
             }
-
+            
         }
         else if (Direction == "left")
         {
@@ -235,6 +238,7 @@ public class Woodcutter : MonoBehaviour
                 {
                     //Should never get here
                     goingDirection = "right";
+
                 }
 
             }

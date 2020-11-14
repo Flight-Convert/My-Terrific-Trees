@@ -3776,10 +3776,10 @@ MonoBehaviour:
   - right
   copyMovePattern: []
   copyMoveIndex: 0
-  readyToMove: 0
   cutterRB: {fileID: 502393353}
   initialMovement: down
   currentMovement: 
+  previousMovement: 
   goingDirection: 
   onBoard: 0
   topEye: {fileID: 1909621205}
@@ -4529,6 +4529,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   woodCutter: {fileID: 502393352}
+  outsideCounter: 0
 --- !u!65 &576107860
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11095,7 +11096,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxActionNum: 1
-  isPlayerTurn: 0
+  actionNum: 0
+  isPlayerTurn: 1
   turnCount: 0
 --- !u!4 &1343370488
 Transform:

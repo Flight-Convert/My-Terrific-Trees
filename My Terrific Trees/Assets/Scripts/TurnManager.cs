@@ -11,6 +11,7 @@ using UnityEngine.UI;
 public class TurnManager : MonoBehaviour
 {
     public int maxActionNum;
+    public int actionNum = 0;
     public bool isPlayerTurn;
     [HideInInspector] public int turnCount;
 
@@ -40,13 +41,14 @@ public class TurnManager : MonoBehaviour
         isPlayerTurn = true;
     }
 
-    //update is for testing the Turn Manager. Delete this after woodcutters are implemented
-    private void Update()
+    private void FixedUpdate()
     {
-        if (!isPlayerTurn)
+        if(actionNum >= maxActionNum)
         {
-            startTurn();
+            endTurn();
+            actionNum = 0;
         }
+
     }
 
     public void endTurn()

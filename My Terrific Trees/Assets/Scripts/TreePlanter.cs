@@ -55,6 +55,7 @@ public class TreePlanter : MonoBehaviour
             /// Plant the tree
             Instantiate(treePrefab, new Vector3(tileCoordinates.x, 0, tileCoordinates.y), treePrefab.transform.rotation);
             remainingTrees--;
+            TurnManager.instance.actionNum++;
         }
         
     }
