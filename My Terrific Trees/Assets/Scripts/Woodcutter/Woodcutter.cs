@@ -26,6 +26,7 @@ public class Woodcutter : MonoBehaviour
     public string initialMovement;
     public string currentMovement;
     public string previousMovement;
+    public string nextMovement = "";
 
     public string goingDirection;
 
@@ -45,7 +46,8 @@ public class Woodcutter : MonoBehaviour
     CheckMove checkMoveLeft;
     CheckMove checkMoveRight;
     CheckMove checkMoveDown;
-    //Reset These after calling appropriate methods
+
+    // Shows what is on this 'eye's tile, 0 - nothing here, 1 - tree here, 2 - off the board
     /// <summary>
     /// Variable updated each turn that gets data of whats at Top Triggerzone of Woodcutter Check
     /// </summary>
@@ -61,7 +63,7 @@ public class Woodcutter : MonoBehaviour
     /// <summary>
     /// Variable updated each turn that gets data of whats at Bottom Triggerzone of Woodcutter Check
     /// </summary>
-    public int bottomEyeData = 0;
+    public int bottomEyeData = 0;    
 
     public Vector3 currentLocation;
 
@@ -76,13 +78,6 @@ public class Woodcutter : MonoBehaviour
 
     private void FixedUpdate()
     {
-        /*if(!TurnManager.instance.isPlayerTurn)
-        {
-            TurnManager.instance.
-            //readyToMove = true;
-        }*/
-        
-
         //*Debug Display of what the eye check is seeing
         Debug.Log("TopEye: " + topEyeData);
         Debug.Log("LeftEye: " + leftEyeData);
@@ -107,10 +102,17 @@ public class Woodcutter : MonoBehaviour
 
             string whereTo = copyMovePattern[copyMoveIndex];
             
-            checkMovement(whereTo);          
-                      
-            doMovement(goingDirection);
-
+            checkMovement(whereTo);
+            
+            if(nextMovement != "")
+            {
+                doMovement(nextMovement);
+            }
+            else
+            {
+                doMovement(goingDirection);
+            }
+            nextMovement = "";
             TurnManager.instance.startTurn();
 
         }
@@ -182,11 +184,19 @@ public class Woodcutter : MonoBehaviour
         //Check Whereto against that direction's 'eye'
         if (Direction == "up")
         {
-            //check topEye's WhatsHere within CheckMove
+            //check topEye's WhatsHere within CheckMove, 1 = Tree
             if(topEyeData == 1)
             {
-                goingDirection = "up";
+                nextMovement = "up";
                 copyMoveIndex += 1;
+            }
+            else if(leftEyeData == 1)
+            {
+                nextMovement = "left";
+            }
+            else if (rightEyeData == 1)
+            {
+                nextMovement = "right";
             }
             //repath if going off board
             else if (topEyeData == 2)
@@ -194,22 +204,22 @@ public class Woodcutter : MonoBehaviour
                 //Check first posible option to move 
                 if (leftEyeData != 2)
                 {
-                    goingDirection = "left";
+                    nextMovement = "left";
                 }
                 else if (rightEyeData != 2)
                 {
-                    goingDirection = "right";
+                    nextMovement = "right";
                 }
                 else
                 {
                     //Should never get here
-                    goingDirection = "down";
+                    nextMovement = "down";
                 }
-
+                copyMoveIndex += 1;
             }
             else
             {
-                goingDirection = Direction;
+                nextMovement = Direction;
                 copyMoveIndex += 1;
             }
             
@@ -219,8 +229,16 @@ public class Woodcutter : MonoBehaviour
             //check leftEye's WhatsHere within CheckMove
             if (leftEyeData == 1)
             {
-                goingDirection = "left";
+                nextMovement = "left";
                 copyMoveIndex += 1;
+            }
+            else if (bottomEyeData == 1)
+            {
+                nextMovement = "down";
+            }
+            else if (topEyeData == 1)
+            {
+                nextMovement = "up";
             }
             //repath if going off board
             else if (leftEyeData == 2)
@@ -228,23 +246,23 @@ public class Woodcutter : MonoBehaviour
                 //Check first posible option to move 
                 if (bottomEyeData != 2)
                 {
-                    goingDirection = "down";
+                    nextMovement = "down";
                 }
                 else if (topEyeData != 2)
                 {
-                    goingDirection = "up";
+                    nextMovement = "up";
                 }
                 else
                 {
                     //Should never get here
-                    goingDirection = "right";
+                    nextMovement = "right";
 
                 }
-
+                copyMoveIndex += 1;
             }
             else
             {
-                goingDirection = Direction;
+                nextMovement = Direction;
                 copyMoveIndex += 1;
             }
 
@@ -254,8 +272,16 @@ public class Woodcutter : MonoBehaviour
             //check rightEye's WhatsHere within CheckMove
             if (rightEyeData == 1)
             {
-                goingDirection = "right";
+                nextMovement = "right";
                 copyMoveIndex += 1;
+            }
+            else if (topEyeData == 1)
+            {
+                nextMovement = "up";
+            }
+            else if (bottomEyeData == 1)
+            {
+                nextMovement = "down";
             }
             //repath if going off board
             else if (rightEyeData == 2)
@@ -263,22 +289,22 @@ public class Woodcutter : MonoBehaviour
                 //Check first posible option to move 
                 if (topEyeData != 2)
                 {
-                    goingDirection = "up";
+                    nextMovement = "up";
                 }
                 else if (bottomEyeData != 2)
                 {
-                    goingDirection = "down";
+                    nextMovement = "down";
                 }
                 else
                 {
                     //Should never get here
-                    goingDirection = "left";
+                    nextMovement = "left";
                 }
-
+                copyMoveIndex += 1;
             }
             else
             {
-                goingDirection = Direction;
+                nextMovement = Direction;
                 copyMoveIndex += 1;
             }
 
@@ -286,10 +312,18 @@ public class Woodcutter : MonoBehaviour
         else if (Direction == "down")
         {
             //check bottomEye's WhatsHere within CheckMove
-            if (bottomEyeData == 1) //Error, NullReferenceException 
+            if (bottomEyeData == 1)  
             {
                 goingDirection = "down";
                 copyMoveIndex += 1;
+            }
+            else if (rightEyeData == 1)
+            {
+                nextMovement = "right";
+            }
+            else if (leftEyeData == 1)
+            {
+                nextMovement = "left";
             }
             //repath if going off board
             else if (bottomEyeData == 2)
@@ -297,22 +331,22 @@ public class Woodcutter : MonoBehaviour
                 //Check first posible option to move 
                 if (rightEyeData != 2)
                 {
-                    goingDirection = "right";
+                    nextMovement = "right";
                 }
                 else if (leftEyeData != 2)
                 {
-                    goingDirection = "left";
+                    nextMovement = "left";
                 }
                 else
                 {
                     //Should never get here
-                    goingDirection = "up";
+                    nextMovement = "up";
                 }
-
+                copyMoveIndex += 1;
             }
             else
             {
-                goingDirection = Direction;
+                nextMovement = Direction;
                 copyMoveIndex += 1;
             }
 

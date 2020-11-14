@@ -7,7 +7,6 @@ TagManager:
   - Griddable
   - Tree
   - Sapling
-  - Small Tree
   - Edge
   - Outside
   - EyeRight
@@ -16,6 +15,7 @@ TagManager:
   - EyeUp
   - Big Tree
   - WCHitbox
+  - Small Tree
   layers:
   - Default
   - TransparentFX

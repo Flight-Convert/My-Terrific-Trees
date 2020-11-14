@@ -7,11 +7,6 @@ using UnityEngine;
 public class CheckMove : MonoBehaviour
 {
     /// <summary>
-    /// Shows what is on this 'eye's tile, 0 - nothing here, 1 - tree here, 2 - off the board
-    /// </summary>
-    //public int whatsHere = 0;
-
-    /// <summary>
     /// Tells name of Side for check
     /// </summary>
     public string whichSide;
@@ -31,33 +26,80 @@ public class CheckMove : MonoBehaviour
 
     }
 
-    /*public string tellWhichSide()
+    public string tellWhichSide()
     {
-
         return whichSide;
-    }*/
+    }
 
     public void resetWhatsHere()
     {
-        
-        //whatsHere = 0;
+        woodcutter.topEyeData = 0;
+        woodcutter.leftEyeData = 0;
+        woodcutter.rightEyeData = 0;
+        woodcutter.bottomEyeData = 0;
+    
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.CompareTag("Small Tree")) 
         {
-            //whatsHere = 1;
+            if (whichSide == "top")
+            {
+                woodcutter.topEyeData = 1;
+            }
+            else if (whichSide == "left")
+            {
+                woodcutter.leftEyeData = 1;
+            }
+            else if (whichSide == "right")
+            {
+                woodcutter.rightEyeData = 1;
+            }
+            else if (whichSide == "bottom")
+            {
+                woodcutter.bottomEyeData = 1;
+            }
         }
 
         else if (other.gameObject.CompareTag("Big Tree"))
         {
-            //whatsHere = 1;
+            if (whichSide == "top")
+            {
+                woodcutter.topEyeData = 1;
+            }
+            else if (whichSide == "left")
+            {
+                woodcutter.leftEyeData = 1;
+            }
+            else if (whichSide == "right")
+            {
+                woodcutter.rightEyeData = 1;
+            }
+            else if (whichSide == "bottom")
+            {
+                woodcutter.bottomEyeData = 1;
+            }
         }
 
         else if (other.gameObject.CompareTag("Outside")) 
         {
-            //whatsHere = 2;
+            if (whichSide == "top")
+            {
+                woodcutter.topEyeData = 2;
+            }
+            else if (whichSide == "left")
+            {
+                woodcutter.leftEyeData = 2;
+            }
+            else if (whichSide == "right")
+            {
+                woodcutter.rightEyeData = 2;
+            }
+            else if (whichSide == "bottom")
+            {
+                woodcutter.bottomEyeData = 2;
+            }
         }
     }
 }

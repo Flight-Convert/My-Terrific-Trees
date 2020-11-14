@@ -99,6 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smallTreePrefab: {fileID: 7703706539017720594}
   bigTreePrefab: {fileID: 7703706539017720594, guid: 74463d6c490960e48acf218a84a66bd8, type: 3}
+  makeGrow: 0
   turnPlanted: 0
   turnsSincePlanted: 0
 --- !u!82 &2777039374681818845
@@ -208,5 +209,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.24441421, y: 0.26986414, z: 0.20000012}
-  m_Center: {x: -0.00052009523, y: -0.009397656, z: 2.2526444e-17}
+  m_Size: {x: 0.24441421, y: 0.26986414, z: 0.6311517}
+  m_Center: {x: -0.00052009523, y: -0.009397656, z: 0.21557584}
