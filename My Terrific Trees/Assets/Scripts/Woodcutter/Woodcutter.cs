@@ -91,6 +91,10 @@ public class Woodcutter : MonoBehaviour
             doReverseMovement(previousMovement); 
         }
 
+        //checkForTrees();
+        setCutterCheckOn();
+
+
         //If on board and ready to move
         if (!TurnManager.instance.isPlayerTurn)
         {
@@ -101,20 +105,44 @@ public class Woodcutter : MonoBehaviour
             }
 
             string whereTo = copyMovePattern[copyMoveIndex];
+
             
-            checkMovement(whereTo);
-            
-            if(nextMovement != "")
+
+            //If no trees around or one is in the woodcutter's path already
+            if (checkForTrees() == false)
+            {
+                //Check if going offboard
+                if (checkMovement(whereTo) != copyMovePattern[copyMoveIndex])
+                {
+                    if(checkMovement(whereTo) == "Error")
+                    {
+                        Debug.Log("checkMovement Failed");
+                    }
+                    else
+                    {
+                        //change whereTo to new direction shown in method
+                        nextMovement = checkMovement(whereTo);
+                        doMovement(nextMovement);
+                    }                   
+                }
+                else
+                {
+                    nextMovement = whereTo;
+                    doMovement(nextMovement);
+                    copyMoveIndex += 1;
+                }
+            }
+            else //If there is a tree
             {
                 doMovement(nextMovement);
             }
-            else
-            {
-                doMovement(goingDirection);
-            }
-            nextMovement = "";
-            TurnManager.instance.startTurn();
+            
+            nextMovement = " ";
+            //resetEyeData();
 
+            //instead, increment enemies done their turn counter
+            //if counter == max enemies then reset counter and startTurn
+            TurnManager.instance.startTurn();
         }
         else
         {
@@ -122,31 +150,172 @@ public class Woodcutter : MonoBehaviour
         }
     }
 
+    public void setTopEyeData(int data)
+    {
+        topEyeData = data;
+    }
+    public void setLeftEyeData(int data)
+    {
+        leftEyeData = data;
+    }
+    public void setRightEyeData(int data)
+    {
+        rightEyeData = data;
+    }
+    public void setBottomEyeData(int data)
+    {
+        bottomEyeData = data;
+    }
+
+    /// <summary>
+    /// Turns the Woodcutter's Check to active and enables it's box collider
+    /// </summary>
+    public void setCutterCheckOn()
+    {
+        cutterCheck.SetActive(true);
+
+        /*topEye.GetComponent<BoxCollider>().enabled = true;
+        leftEye.GetComponent<BoxCollider>().enabled = true;
+        rightEye.GetComponent<BoxCollider>().enabled = true;
+        bottomEye.GetComponent<BoxCollider>().enabled = true;*/
+    }
+
+    /// <summary>
+    /// Turns the Woodcutter's Check to inactive and disables it's box collider
+    /// </summary>
+    public void setCutterCheckOff()
+    {
+        /*topEye.GetComponent<BoxCollider>().enabled = false;
+        leftEye.GetComponent<BoxCollider>().enabled = false;
+        rightEye.GetComponent<BoxCollider>().enabled = false;
+        bottomEye.GetComponent<BoxCollider>().enabled = false;*/
+
+        cutterCheck.SetActive(false);
+    }
+
+    /// <summary>
+    /// Returns true if there is a tree around the woodcutter and the woodcutter is not already pathing to it before this method call
+    /// </summary>
+    /// <returns></returns>
+    public bool checkForTrees()
+    {
+        //resetEyeData();
+        setCutterCheckOn();
+
+        //Checks clockwise
+        if (topEyeData == 1)
+        {
+            if(copyMovePattern[copyMoveIndex] != "up")
+            {
+                Debug.Log("Changing Next direction to up");
+                nextMovement = "up";
+                setCutterCheckOff();
+                return true;
+            }
+            else
+            {
+                Debug.Log("Tree in current path");
+            }
+            setCutterCheckOff();
+            return false;
+        }
+        else if (rightEyeData == 1)
+        {
+            if (copyMovePattern[copyMoveIndex] != "right")
+            {
+                Debug.Log("Changing Next direction to right");
+                nextMovement = "right";
+                setCutterCheckOff();
+                return true;
+            }
+            else
+            {
+                Debug.Log("Tree in current path");
+            }
+            setCutterCheckOff();
+            return false;
+        }
+        else if (bottomEyeData == 1)
+        {
+            if (copyMovePattern[copyMoveIndex] != "down")
+            {
+                Debug.Log("Changing Next direction to down");
+                nextMovement = "down";
+                setCutterCheckOff();
+                return true;
+            }
+            else
+            {
+                Debug.Log("Tree in current path");
+            }
+            setCutterCheckOff();
+            return false;
+        }
+        else if (leftEyeData == 1)
+        {
+            if (copyMovePattern[copyMoveIndex] != "left")
+            {
+                Debug.Log("Changing Next direction to left");
+                nextMovement = "left";
+                setCutterCheckOff();
+                return true;
+            }
+            else
+            {
+                Debug.Log("Tree in current path");
+            }
+            setCutterCheckOff();
+            return false;
+        }
+        else
+        {           
+            Debug.Log("No Trees around this Woodcutter");
+            setCutterCheckOff();
+            return false;
+        }
+        
+    }
+
+    /// <summary>
+    /// Quick function to reset data of what eyes 'see' 
+    /// </summary>
+    private void resetEyeData()
+    {
+        topEyeData = 0;
+        leftEyeData = 0;
+        rightEyeData = 0;
+        bottomEyeData = 0;
+    }
+
     private void doReverseMovement(string lastMovement)
     {
         if (lastMovement == "up")
         {
             cutterRB.transform.position += goDown;
-            previousMovement = lastMovement;
-            currentMovement = "down";
+            //previousMovement = lastMovement;
+            //nextMovement = "down";
+            doMovement("down");
         }
-        if (lastMovement == "left")
+        else if (lastMovement == "left")
         {
             cutterRB.transform.position += goRight;
-            previousMovement = lastMovement;
-            currentMovement = "right";
+            //previousMovement = lastMovement;
+            //nextMovement = "right";
+            doMovement("right");
         }
-        if (lastMovement == "right")
+        else if (lastMovement == "right")
         {
             cutterRB.transform.position += goLeft;
-            previousMovement = lastMovement;
-            currentMovement = "left";
+            //previousMovement = lastMovement;
+            //nextMovement = "left";
+            doMovement("left");
         }
-        if (lastMovement == "down")
+        else if (lastMovement == "down")
         {
             cutterRB.transform.position += goUp;
-            previousMovement = lastMovement;
-            currentMovement = "up";
+            //previousMovement = lastMovement;
+            //nextMovement = "up";
+            doMovement("up");
         }
 
     }
@@ -155,7 +324,7 @@ public class Woodcutter : MonoBehaviour
     void Update()
     {
         //throw away if statement after further logic is introduced
-        
+        /*
         if (Input.GetKeyDown("space"))
         {
             //
@@ -166,208 +335,148 @@ public class Woodcutter : MonoBehaviour
         {
             //
             cutterCheck.SetActive(false);
-        }
+        }*/
 
     }
 
 
-    //Main logic behind movement behavior
-    public void checkMovement(string Direction) 
+    /// <summary>
+    /// Checks to make sure the player is not walking off the board if they walk in (param) "Direction", returns correct movement
+    /// </summary>
+    /// <param name="Direction"></param>
+    public string checkMovement(string Direction) 
     {
-        cutterCheck.SetActive(true);
+        //resetEyeData();
+        setCutterCheckOn();
 
-        topEye.GetComponent<BoxCollider>().enabled = true;
-        leftEye.GetComponent<BoxCollider>().enabled = true;
-        rightEye.GetComponent<BoxCollider>().enabled = true;
-        bottomEye.GetComponent<BoxCollider>().enabled = true;
- 
         //Check Whereto against that direction's 'eye'
         if (Direction == "up")
         {
-            //check topEye's WhatsHere within CheckMove, 1 = Tree
-            if(topEyeData == 1)
-            {
-                nextMovement = "up";
-                copyMoveIndex += 1;
-            }
-            else if(leftEyeData == 1)
-            {
-                nextMovement = "left";
-            }
-            else if (rightEyeData == 1)
-            {
-                nextMovement = "right";
-            }
             //repath if going off board
-            else if (topEyeData == 2)
+            if (topEyeData == 2)
             {
                 //Check first posible option to move 
                 if (leftEyeData != 2)
                 {
-                    nextMovement = "left";
+                    setCutterCheckOff();
+                    return "left";
                 }
                 else if (rightEyeData != 2)
                 {
-                    nextMovement = "right";
+                    setCutterCheckOff();
+                    return "right";
                 }
                 else
                 {
-                    //Should never get here
-                    nextMovement = "down";
-                }
-                copyMoveIndex += 1;
+                    setCutterCheckOff();
+                    return "down";
+                }               
             }
             else
             {
-                nextMovement = Direction;
-                copyMoveIndex += 1;
+                setCutterCheckOff();
+                return "up";
             }
             
         }
-        else if (Direction == "left")
+        else if (Direction == "right")
         {
-            //check leftEye's WhatsHere within CheckMove
-            if (leftEyeData == 1)
-            {
-                nextMovement = "left";
-                copyMoveIndex += 1;
-            }
-            else if (bottomEyeData == 1)
-            {
-                nextMovement = "down";
-            }
-            else if (topEyeData == 1)
-            {
-                nextMovement = "up";
-            }
             //repath if going off board
-            else if (leftEyeData == 2)
-            {
-                //Check first posible option to move 
-                if (bottomEyeData != 2)
-                {
-                    nextMovement = "down";
-                }
-                else if (topEyeData != 2)
-                {
-                    nextMovement = "up";
-                }
-                else
-                {
-                    //Should never get here
-                    nextMovement = "right";
-
-                }
-                copyMoveIndex += 1;
-            }
-            else
-            {
-                nextMovement = Direction;
-                copyMoveIndex += 1;
-            }
-
-        }
-        else if(Direction == "right")
-        {
-            //check rightEye's WhatsHere within CheckMove
-            if (rightEyeData == 1)
-            {
-                nextMovement = "right";
-                copyMoveIndex += 1;
-            }
-            else if (topEyeData == 1)
-            {
-                nextMovement = "up";
-            }
-            else if (bottomEyeData == 1)
-            {
-                nextMovement = "down";
-            }
-            //repath if going off board
-            else if (rightEyeData == 2)
+            if (rightEyeData == 2)
             {
                 //Check first posible option to move 
                 if (topEyeData != 2)
                 {
-                    nextMovement = "up";
+                    setCutterCheckOff();
+                    return "up";
                 }
                 else if (bottomEyeData != 2)
                 {
-                    nextMovement = "down";
+                    setCutterCheckOff();
+                    return "down";
                 }
                 else
                 {
-                    //Should never get here
-                    nextMovement = "left";
+                    setCutterCheckOff();
+                    return "left";
                 }
-                copyMoveIndex += 1;
             }
             else
             {
-                nextMovement = Direction;
-                copyMoveIndex += 1;
+                setCutterCheckOff();
+                return "right";
+            }
+
+        }
+        else if (Direction == "left")
+        {
+            //repath if going off board
+            if (leftEyeData == 2)
+            {
+                //Check first posible option to move 
+                if (bottomEyeData != 2)
+                {
+                    setCutterCheckOff();
+                    return "down";
+                }
+                else if (topEyeData != 2)
+                {
+                    setCutterCheckOff();
+                    return "up";
+                }
+                else
+                {
+                    setCutterCheckOff();
+                    return "right";
+                }
+            }
+            else
+            {
+                setCutterCheckOff();
+                return "left";
             }
 
         }
         else if (Direction == "down")
         {
-            //check bottomEye's WhatsHere within CheckMove
-            if (bottomEyeData == 1)  
-            {
-                goingDirection = "down";
-                copyMoveIndex += 1;
-            }
-            else if (rightEyeData == 1)
-            {
-                nextMovement = "right";
-            }
-            else if (leftEyeData == 1)
-            {
-                nextMovement = "left";
-            }
             //repath if going off board
-            else if (bottomEyeData == 2)
+            if (bottomEyeData == 2)
             {
                 //Check first posible option to move 
                 if (rightEyeData != 2)
                 {
-                    nextMovement = "right";
+                    setCutterCheckOff();
+                    return "right";
                 }
                 else if (leftEyeData != 2)
                 {
-                    nextMovement = "left";
+                    setCutterCheckOff();
+                    return "left";
                 }
                 else
                 {
-                    //Should never get here
-                    nextMovement = "up";
+                    setCutterCheckOff();
+                    return "up";
                 }
-                copyMoveIndex += 1;
             }
             else
             {
-                nextMovement = Direction;
-                copyMoveIndex += 1;
+                setCutterCheckOff();
+                return "down";
             }
-
         }
-
-        topEyeData = 0;
-        leftEyeData = 0;
-        rightEyeData = 0;
-        bottomEyeData = 0;
-
-        topEye.GetComponent<BoxCollider>().enabled = false;
-        leftEye.GetComponent<BoxCollider>().enabled = false;
-        rightEye.GetComponent<BoxCollider>().enabled = false;
-        bottomEye.GetComponent<BoxCollider>().enabled = false;
-
-        cutterCheck.SetActive(false);
+        else
+        {
+            setCutterCheckOff();
+            Debug.Log("Direction was not inputed correctly for checkMovement");
+            return "Error";
+        }
     }
 
 
     private void doMovement(string movement)
     {
+        currentMovement = movement;
         if (movement == "auto")
         {
             //unimplemented - may use in future

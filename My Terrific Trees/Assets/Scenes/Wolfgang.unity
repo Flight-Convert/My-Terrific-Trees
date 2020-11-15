@@ -3782,7 +3782,7 @@ MonoBehaviour:
   previousMovement: 
   nextMovement: 
   goingDirection: 
-  onBoard: 0
+  onBoard: 1
   topEye: {fileID: 1909621205}
   leftEye: {fileID: 614860468}
   rightEye: {fileID: 1722515710}
@@ -4978,6 +4978,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whichSide: 
   woodcutter: {fileID: 502393352}
+  whatsHere: 
+  inATriggerZone: 0
 --- !u!1 &620949379
 GameObject:
   m_ObjectHideFlags: 0
@@ -5878,11 +5880,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4167887359224246008, guid: 4bacc87ba4e611243a73b10a1d96112f, type: 3}
       propertyPath: m_IsTrigger
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4167887359224246008, guid: 4bacc87ba4e611243a73b10a1d96112f, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167887359224246008, guid: 4bacc87ba4e611243a73b10a1d96112f, type: 3}
+      propertyPath: m_Size.y
+      value: 10.286919
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167887359224246008, guid: 4bacc87ba4e611243a73b10a1d96112f, type: 3}
+      propertyPath: m_Center.y
+      value: 0.4846363
       objectReference: {fileID: 0}
     - target: {fileID: 4167887359416394024, guid: 4bacc87ba4e611243a73b10a1d96112f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5934,7 +5944,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4167887359416394025, guid: 4bacc87ba4e611243a73b10a1d96112f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4167887359802531429, guid: 4bacc87ba4e611243a73b10a1d96112f, type: 3}
       propertyPath: m_TagString
@@ -5942,11 +5952,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4167887359802531431, guid: 4bacc87ba4e611243a73b10a1d96112f, type: 3}
       propertyPath: m_IsTrigger
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4167887359802531431, guid: 4bacc87ba4e611243a73b10a1d96112f, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167887359802531431, guid: 4bacc87ba4e611243a73b10a1d96112f, type: 3}
+      propertyPath: m_Size.y
+      value: 11.747337
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167887359802531431, guid: 4bacc87ba4e611243a73b10a1d96112f, type: 3}
+      propertyPath: m_Center.y
+      value: -0.09286404
       objectReference: {fileID: 0}
     - target: {fileID: 4167887359813058008, guid: 4bacc87ba4e611243a73b10a1d96112f, type: 3}
       propertyPath: m_TagString
@@ -5954,11 +5972,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4167887359813058010, guid: 4bacc87ba4e611243a73b10a1d96112f, type: 3}
       propertyPath: m_IsTrigger
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4167887359813058010, guid: 4bacc87ba4e611243a73b10a1d96112f, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167887359813058010, guid: 4bacc87ba4e611243a73b10a1d96112f, type: 3}
+      propertyPath: m_Size.y
+      value: 6.8413334
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167887359813058010, guid: 4bacc87ba4e611243a73b10a1d96112f, type: 3}
+      propertyPath: m_Center.y
+      value: 0.0017299652
       objectReference: {fileID: 0}
     - target: {fileID: 4167887360356368797, guid: 4bacc87ba4e611243a73b10a1d96112f, type: 3}
       propertyPath: m_TagString
@@ -5966,11 +5992,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4167887360356368799, guid: 4bacc87ba4e611243a73b10a1d96112f, type: 3}
       propertyPath: m_IsTrigger
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4167887360356368799, guid: 4bacc87ba4e611243a73b10a1d96112f, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167887360356368799, guid: 4bacc87ba4e611243a73b10a1d96112f, type: 3}
+      propertyPath: m_Size.y
+      value: 10.217577
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167887360356368799, guid: 4bacc87ba4e611243a73b10a1d96112f, type: 3}
+      propertyPath: m_Center.y
+      value: 0.13508916
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4bacc87ba4e611243a73b10a1d96112f, type: 3}
@@ -11083,6 +11117,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whichSide: 
   woodcutter: {fileID: 502393352}
+  whatsHere: 
+  inATriggerZone: 0
 --- !u!1 &1343370486
 GameObject:
   m_ObjectHideFlags: 0
@@ -14093,6 +14129,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whichSide: 
   woodcutter: {fileID: 502393352}
+  whatsHere: 
+  inATriggerZone: 0
 --- !u!1 &1723514067
 GameObject:
   m_ObjectHideFlags: 0
@@ -15805,6 +15843,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whichSide: 
   woodcutter: {fileID: 502393352}
+  whatsHere: 
+  inATriggerZone: 0
 --- !u!1 &1911332138
 GameObject:
   m_ObjectHideFlags: 0

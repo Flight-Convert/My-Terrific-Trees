@@ -14,6 +14,10 @@ public class CheckMove : MonoBehaviour
     //Reference the woodcutter class
     public Woodcutter woodcutter;
 
+    public string whatsHere;
+
+    public bool inATriggerZone = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +27,7 @@ public class CheckMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     public string tellWhichSide()
@@ -33,72 +37,88 @@ public class CheckMove : MonoBehaviour
 
     public void resetWhatsHere()
     {
-        woodcutter.topEyeData = 0;
+        /*woodcutter.topEyeData = 0;
         woodcutter.leftEyeData = 0;
         woodcutter.rightEyeData = 0;
         woodcutter.bottomEyeData = 0;
-    
+    */
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Small Tree")) 
+        //Debug.Log("Eye '" + whichSide + "' hit a triggerzone!: " + other.name);
+
+        if (other.name == "Small Tree(Clone)")
         {
-            if (whichSide == "top")
+            Debug.Log("Eye '" + whichSide + "' hit a triggerzone!: " + other.name);
+            if (whichSide == "Eye Up")
             {
-                woodcutter.topEyeData = 1;
+                whatsHere = "tree";
+                woodcutter.setTopEyeData(1);
             }
-            else if (whichSide == "left")
+            else if (whichSide == "Eye Left")
             {
-                woodcutter.leftEyeData = 1;
+                whatsHere = "tree";
+                woodcutter.setLeftEyeData(1);
             }
-            else if (whichSide == "right")
+            else if (whichSide == "Eye Right")
             {
-                woodcutter.rightEyeData = 1;
+                whatsHere = "tree";
+                woodcutter.setRightEyeData(1);
             }
-            else if (whichSide == "bottom")
+            else if (whichSide == "Eye Down")
             {
-                woodcutter.bottomEyeData = 1;
+                whatsHere = "tree";
+                woodcutter.setBottomEyeData(1);
+            }
+        }
+        if (other.name == "Big Tree(Clone)")
+        {
+            Debug.Log("Eye '" + whichSide + "' hit a triggerzone!: " + other.name);
+            if (whichSide == "Eye Up")
+            {
+                whatsHere = "tree";
+                woodcutter.setTopEyeData(1);
+            }
+            else if (whichSide == "Eye Left")
+            {
+                whatsHere = "tree";
+                woodcutter.setLeftEyeData(1);
+            }
+            else if (whichSide == "Eye Right")
+            {
+                whatsHere = "tree";
+                woodcutter.setRightEyeData(1);
+            }
+            else if (whichSide == "Eye Down")
+            {
+                whatsHere = "tree";
+                woodcutter.setBottomEyeData(1);
             }
         }
 
-        else if (other.gameObject.CompareTag("Big Tree"))
+        else if (other.name == "Outer Edge") 
         {
-            if (whichSide == "top")
+            Debug.Log("Eye '" + whichSide + "' hit a triggerzone!: " + other.name);
+            if (whichSide == "Eye Up")
             {
-                woodcutter.topEyeData = 1;
+                whatsHere = "OffBoard";
+                woodcutter.setTopEyeData(2);
             }
-            else if (whichSide == "left")
+            else if (whichSide == "Eye Left")
             {
-                woodcutter.leftEyeData = 1;
+                whatsHere = "OffBoard";
+                woodcutter.setLeftEyeData(2);
             }
-            else if (whichSide == "right")
+            else if (whichSide == "Eye Right")
             {
-                woodcutter.rightEyeData = 1;
+                whatsHere = "OffBoard";
+                woodcutter.setRightEyeData(2);
             }
-            else if (whichSide == "bottom")
+            else if (whichSide == "Eye Down")
             {
-                woodcutter.bottomEyeData = 1;
-            }
-        }
-
-        else if (other.gameObject.CompareTag("Outside")) 
-        {
-            if (whichSide == "top")
-            {
-                woodcutter.topEyeData = 2;
-            }
-            else if (whichSide == "left")
-            {
-                woodcutter.leftEyeData = 2;
-            }
-            else if (whichSide == "right")
-            {
-                woodcutter.rightEyeData = 2;
-            }
-            else if (whichSide == "bottom")
-            {
-                woodcutter.bottomEyeData = 2;
+                whatsHere = "OffBoard";
+                woodcutter.setBottomEyeData(2);
             }
         }
     }

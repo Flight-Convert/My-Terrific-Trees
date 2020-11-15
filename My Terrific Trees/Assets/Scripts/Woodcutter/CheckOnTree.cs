@@ -33,7 +33,8 @@ public class CheckOnTree : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Edge"))
+        Debug.Log("Woodcutter Stepped on a triggerzone!: " + other.name);
+        /*if (other.gameObject.CompareTag("Edge"))
         {
             woodCutter.onBoard = true;
             //onBoard = true;
@@ -44,16 +45,16 @@ public class CheckOnTree : MonoBehaviour
             woodCutter.onBoard = false;
             outsideCounter++;
             
-        }
+        }*/
 
         //if woodcutter directly walks on tree, destroy tree
 
-        if (other.gameObject.CompareTag("Small Tree"))
+        if (other.name == "Small Tree(Clone)")
         {
             Destroy(other.gameObject);
         }
 
-        if (other.gameObject.CompareTag("Big Tree"))
+        if (other.name == "Big Tree(Clone)")
         {
             Destroy(other.gameObject);
         }
