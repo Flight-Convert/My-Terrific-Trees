@@ -123,6 +123,7 @@ public class Woodcutter : MonoBehaviour
                         //change whereTo to new direction shown in method
                         nextMovement = checkMovement(whereTo);
                         doMovement(nextMovement);
+                        copyMoveIndex += 1;
                     }                   
                 }
                 else
@@ -138,7 +139,7 @@ public class Woodcutter : MonoBehaviour
             }
             
             nextMovement = " ";
-            //resetEyeData();
+            resetEyeData();
 
             //instead, increment enemies done their turn counter
             //if counter == max enemies then reset counter and startTurn
