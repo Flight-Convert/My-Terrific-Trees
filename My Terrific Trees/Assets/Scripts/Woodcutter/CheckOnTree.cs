@@ -10,10 +10,13 @@ public class CheckOnTree : MonoBehaviour
 
     public int outsideCounter = 0;
 
+    AudioSource audioSource;
+    public AudioClip chainsawAudio;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -52,11 +55,13 @@ public class CheckOnTree : MonoBehaviour
         if (other.name == "Small Tree(Clone)")
         {
             Destroy(other.gameObject);
+            audioSource.PlayOneShot(chainsawAudio, 0.25f);
         }
 
         if (other.name == "Big Tree(Clone)")
         {
             Destroy(other.gameObject);
+            audioSource.PlayOneShot(chainsawAudio, 0.25f);
         }
     }
 
