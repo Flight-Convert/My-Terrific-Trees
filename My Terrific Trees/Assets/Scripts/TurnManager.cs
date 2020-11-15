@@ -14,6 +14,8 @@ public class TurnManager : MonoBehaviour
     public int actionNum = 0;
     public bool isPlayerTurn;
     [HideInInspector] public int turnCount;
+    public int numberOfEnemies;
+    public int enemyTurnsCount;
 
     #region Singleton code
     public static TurnManager instance;
@@ -48,7 +50,13 @@ public class TurnManager : MonoBehaviour
             endTurn();
             actionNum = 0;
         }
+        numberOfEnemies = FindObjectsOfType<Woodcutter>().Length;
 
+        if(enemyTurnsCount == numberOfEnemies)
+        {
+            enemyTurnsCount = 0;
+            startTurn();
+        }
     }
 
     public void endTurn()

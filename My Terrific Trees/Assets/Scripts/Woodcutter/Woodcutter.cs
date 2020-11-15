@@ -15,6 +15,8 @@ public class Woodcutter : MonoBehaviour
     //Set this from the inspector
     public string[] movePatternList; //Don't affect this list, use copy to manipulate vvv
     public string[] copyMovePattern;// Affect ME
+    //List<string> undoTowardsTrees = new List<string>();
+    
     public int copyMoveIndex = 0; //Where in list we are
     private int patternListLength;
 
@@ -94,7 +96,6 @@ public class Woodcutter : MonoBehaviour
         //checkForTrees();
         setCutterCheckOn();
 
-
         //If on board and ready to move
         if (!TurnManager.instance.isPlayerTurn)
         {
@@ -106,15 +107,20 @@ public class Woodcutter : MonoBehaviour
 
             string whereTo = copyMovePattern[copyMoveIndex];
 
+            //To be fixed later
+            /*if (undoTowardsTrees.Count > 0)
+            {
+                doReverseMovement(undoTowardsTrees[0]);
+                undoTowardsTrees.RemoveAt(0);
+            }*/
             
-
             //If no trees around or one is in the woodcutter's path already
             if (checkForTrees() == false)
-            {
+                {
                 //Check if going offboard
                 if (checkMovement(whereTo) != copyMovePattern[copyMoveIndex])
                 {
-                    if(checkMovement(whereTo) == "Error")
+                    if (checkMovement(whereTo) == "Error")
                     {
                         Debug.Log("checkMovement Failed");
                     }
@@ -124,7 +130,7 @@ public class Woodcutter : MonoBehaviour
                         nextMovement = checkMovement(whereTo);
                         doMovement(nextMovement);
                         copyMoveIndex += 1;
-                    }                   
+                    }
                 }
                 else
                 {
@@ -134,7 +140,8 @@ public class Woodcutter : MonoBehaviour
                 }
             }
             else //If there is a tree
-            {
+            { //need to store moves towards tree to then loop back through 
+                //undoTowardsTrees.Add(nextMovement);
                 doMovement(nextMovement);
             }
             
@@ -143,7 +150,7 @@ public class Woodcutter : MonoBehaviour
 
             //instead, increment enemies done their turn counter
             //if counter == max enemies then reset counter and startTurn
-            TurnManager.instance.startTurn();
+            TurnManager.instance.enemyTurnsCount++;
         }
         else
         {
