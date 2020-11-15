@@ -22,6 +22,7 @@ public class TreeGrower : MonoBehaviour
     void Start()
     {
         turnPlanted = TurnManager.instance.turnCount;
+        GameManager.instance.score++;
     }
 
     private void Update()

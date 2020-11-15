@@ -11,7 +11,7 @@ using UnityEngine;
 public class CheckTreeCount : MonoBehaviour
 {
     TreePlanter tp;
-    bool lost = false;
+    [HideInInspector]public bool lost = false;
 
     private void Start()
     {
@@ -32,6 +32,7 @@ public class CheckTreeCount : MonoBehaviour
                 {
                     Debug.Log("There are no trees remaining. You lose!");
                     lost = true;
+                    GameManager.instance.ended = true;
                 }
             }
         }

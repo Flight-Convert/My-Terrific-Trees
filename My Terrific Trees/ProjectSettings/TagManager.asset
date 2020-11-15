@@ -16,6 +16,7 @@ TagManager:
   - Big Tree
   - WCHitbox
   - Small Tree
+  - TreeCheck
   layers:
   - Default
   - TransparentFX

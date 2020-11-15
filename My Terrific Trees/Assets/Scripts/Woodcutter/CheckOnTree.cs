@@ -56,12 +56,14 @@ public class CheckOnTree : MonoBehaviour
         {
             Destroy(other.gameObject);
             audioSource.PlayOneShot(chainsawAudio, 0.25f);
+            GameManager.instance.score -= 2;
         }
 
         if (other.name == "Big Tree(Clone)")
         {
             Destroy(other.gameObject);
             audioSource.PlayOneShot(chainsawAudio, 0.25f);
+            GameManager.instance.score -= 3;
         }
     }
 
