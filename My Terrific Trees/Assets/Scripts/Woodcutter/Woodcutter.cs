@@ -25,7 +25,7 @@ public class Woodcutter : MonoBehaviour
     public Rigidbody cutterRB;
     //public Rigidbody checkRB;
 
-    public string initialMovement;
+    //public string initialMovement;
     public string currentMovement;
     public string previousMovement;
     public string nextMovement = "";
