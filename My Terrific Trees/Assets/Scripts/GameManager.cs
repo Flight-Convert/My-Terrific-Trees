@@ -11,12 +11,12 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public Text endText;
-    public Text scoreText;
-    public CheckTreeCount treeCheck;
+    private Text endText;
+    private Text scoreText;
+    private CheckTreeCount treeCheck;
 
-    public bool ended;
-    public bool won;
+    public bool ended = false;
+    public bool won = false;
     public float targetScore = 20;
     public float score = 0;
 
@@ -42,10 +42,20 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         treeCheck = GameObject.FindGameObjectWithTag("TreeCheck").GetComponent<CheckTreeCount>();
+        endText = GameObject.FindGameObjectWithTag("EndText").GetComponent<Text>();
+        scoreText = GameObject.FindGameObjectWithTag("ScoreText").GetComponent<Text>();
+        endText.gameObject.SetActive(false);
     }
 
     void Update()
     {
+        if(treeCheck == null)
+        {
+            treeCheck = GameObject.FindGameObjectWithTag("TreeCheck").GetComponent<CheckTreeCount>();
+            endText = GameObject.FindGameObjectWithTag("EndText").GetComponent<Text>();
+            scoreText = GameObject.FindGameObjectWithTag("ScoreText").GetComponent<Text>();
+            endText.gameObject.SetActive(false);
+        }
         if(score >= targetScore && ended != true)
         {
             won = true;
@@ -53,7 +63,8 @@ public class GameManager : MonoBehaviour
         }
         if (ended)
         {
-            if(won)
+            endText.gameObject.SetActive(true);
+            if (won)
             {
                 endText.text = "You Won!\nPress R To Restart";
             }
@@ -63,6 +74,11 @@ public class GameManager : MonoBehaviour
             }
             if(Input.GetKeyDown(KeyCode.R))
             {
+                ended = false;
+                won = false;
+                targetScore = 20;
+                score = 0;
+
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
         }
