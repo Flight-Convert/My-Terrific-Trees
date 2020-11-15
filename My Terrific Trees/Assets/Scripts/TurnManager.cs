@@ -52,7 +52,7 @@ public class TurnManager : MonoBehaviour
         }
         numberOfEnemies = FindObjectsOfType<Woodcutter>().Length;
 
-        if(enemyTurnsCount == numberOfEnemies)
+        if(enemyTurnsCount == numberOfEnemies && numberOfEnemies != 0)
         {
             enemyTurnsCount = 0;
             startTurn();
@@ -63,6 +63,10 @@ public class TurnManager : MonoBehaviour
     {
         isPlayerTurn = false;
         Debug.Log("The player's turn has ended");
+        if (numberOfEnemies == 0)
+        {
+            startTurn();
+        }
     }
 
     public void startTurn()

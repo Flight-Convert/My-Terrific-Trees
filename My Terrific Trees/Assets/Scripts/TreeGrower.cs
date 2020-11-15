@@ -26,8 +26,8 @@ public class TreeGrower : MonoBehaviour
 
     private void Update()
     {
-        turnsSincePlanted = turnPlanted - TurnManager.instance.turnCount;
-        if (turnsSincePlanted == 2)
+        turnsSincePlanted = TurnManager.instance.turnCount - turnPlanted;
+        if (turnsSincePlanted >= 2)
         {
             GrowTree();
         }

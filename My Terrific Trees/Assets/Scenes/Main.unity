@@ -261,9 +261,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ccc5c1fc02b1ea4b8cc57526591099b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxActionNum: 5
+  maxActionNum: 1
+  actionNum: 0
   isPlayerTurn: 0
   turnCount: 0
+  numberOfEnemies: 0
+  enemyTurnsCount: 0
 --- !u!4 &162290193
 Transform:
   m_ObjectHideFlags: 0
@@ -390,7 +393,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 909e5348e0674844f9bb4d677d372a6b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -734,7 +737,7 @@ MonoBehaviour:
   treePrefab: {fileID: 7703706539017720594, guid: 400c23db7e3094c45a9083337228074f, type: 3}
   remainingTrees: 25
   treeCountText: {fileID: 1751080681}
-  boardSize: {x: 0, y: 0}
+  boardSize: {x: 10, y: 10}
 --- !u!4 &1161573549
 Transform:
   m_ObjectHideFlags: 0
@@ -850,7 +853,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1640232824
 RectTransform:
   m_ObjectHideFlags: 0

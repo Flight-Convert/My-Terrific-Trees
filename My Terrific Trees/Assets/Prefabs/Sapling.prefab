@@ -112,6 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smallTreePrefab: {fileID: 7703706539017720594, guid: b110cead02c03394e9138c3865f41d77, type: 3}
   bigTreePrefab: {fileID: 7703706539017720594, guid: 74463d6c490960e48acf218a84a66bd8, type: 3}
+  makeGrow: 0
   turnPlanted: 0
   turnsSincePlanted: 0
 --- !u!82 &787894376307516154
