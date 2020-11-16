@@ -10,6 +10,7 @@ using UnityEngine.UI;
 
 public class TurnManager : MonoBehaviour
 {
+    TreePlanter tp;
     public int maxActionNum;
     public int actionNum = 0;
     public bool isPlayerTurn;
@@ -39,6 +40,7 @@ public class TurnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        tp = FindObjectOfType<TreePlanter>();
         turnCount = 0;
         isPlayerTurn = true;
     }
@@ -57,6 +59,27 @@ public class TurnManager : MonoBehaviour
             enemyTurnsCount = 0;
             startTurn();
         }
+        if(tp.remainingTrees <= 0)
+        {
+            StartCoroutine("EndSequence");
+        }
+    }
+
+    IEnumerator EndSequence()
+    {
+        int numYoungTrees = GameObject.FindGameObjectsWithTag("Sapling").Length
+                            + GameObject.FindGameObjectsWithTag("Small Tree").Length;
+        while (numYoungTrees > 0)
+        {
+            yield return new WaitForSeconds(1f);
+            endTurn();
+            if (numberOfEnemies > 0)
+            {
+                startTurn();
+            }
+            numYoungTrees = GameObject.FindGameObjectsWithTag("Sapling").Length + GameObject.FindGameObjectsWithTag("Small Tree").Length;
+        }
+        GameManager.instance.ended = true;
     }
 
     public void endTurn()
