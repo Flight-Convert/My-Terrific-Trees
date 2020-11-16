@@ -5,7 +5,7 @@ using UnityEngine;
 
 /*
 * Wolfgang Gross
-* Assignment 7
+* Group Project - My Terrific Trees
 * Behavior for Woodcutter enemy
 * --
 */
@@ -15,8 +15,8 @@ public class Woodcutter : MonoBehaviour
     //Set this from the inspector
     public string[] movePatternList; //Don't affect this list, use copy to manipulate vvv
     private string[] copyMovePattern;// Affect ME
-    //List<string> undoTowardsTrees = new List<string>();
-    
+                                     //List<string> undoTowardsTrees = new List<string>();
+
     private int copyMoveIndex = 0; //Where in list we are
     private int patternListLength;
 
@@ -50,6 +50,9 @@ public class Woodcutter : MonoBehaviour
     private CheckMove checkMoveRight;
     private CheckMove checkMoveDown;
 
+    //public int maxMoveCount;
+    //private int moveCount = 0;
+
     // Shows what is on this 'eye's tile, 0 - nothing here, 1 - tree here, 2 - off the board
     /// <summary>
     /// Variable updated each turn that gets data of whats at Top Triggerzone of Woodcutter Check
@@ -67,9 +70,7 @@ public class Woodcutter : MonoBehaviour
     /// Variable updated each turn that gets data of whats at Bottom Triggerzone of Woodcutter Check
     /// </summary>
     public int bottomEyeData = 0;    
-
-    
-
+                                    
     // Start is called before the first frame update
     void Start()
     {
@@ -79,6 +80,11 @@ public class Woodcutter : MonoBehaviour
 
     private void FixedUpdate()
     {
+        /*if(TurnManager.instance.isPlayerTurn)
+        {
+            moveCount = 0;
+        }*/
+
         //*Debug Display of what the eye check is seeing
         Debug.Log("TopEye: " + topEyeData);
         Debug.Log("LeftEye: " + leftEyeData);
@@ -89,72 +95,83 @@ public class Woodcutter : MonoBehaviour
         if (!onBoard)
         {
             //Do reverse of last move made to get offboard
-            doReverseMovement(previousMovement); 
+            doReverseMovement(previousMovement);
         }
 
         //checkForTrees();
         setCutterCheckOn();
 
         //If on board and ready to move
-        if (!TurnManager.instance.isPlayerTurn)
+        if (!TurnManager.instance.isPlayerTurn /*&& moveCount <= maxMoveCount*/)
         {
-            //Figure out Movement First
-            if (copyMoveIndex == patternListLength)
-            {
-                copyMoveIndex = 0;
-            }
-
-            string whereTo = copyMovePattern[copyMoveIndex];
-
-            //To be fixed later
-            /*if (undoTowardsTrees.Count > 0)
-            {
-                doReverseMovement(undoTowardsTrees[0]);
-                undoTowardsTrees.RemoveAt(0);
-            }*/
             
-            //If no trees around or one is in the woodcutter's path already
-            if (checkForTrees() == false)
+                
+             //Figure out Movement First
+             if (copyMoveIndex == patternListLength)
+             {
+                copyMoveIndex = 0;
+             }
+
+                string whereTo = copyMovePattern[copyMoveIndex];
+
+                //To be fixed later
+                /*if (undoTowardsTrees.Count > 0)
                 {
-                //Check if going offboard
-                if (checkMovement(whereTo) != copyMovePattern[copyMoveIndex])
+                    doReverseMovement(undoTowardsTrees[0]);
+                    undoTowardsTrees.RemoveAt(0);
+                }*/
+
+                //If no trees around or one is in the woodcutter's path already
+                if (checkForTrees() == false)
                 {
-                    if (checkMovement(whereTo) == "Error")
+                    //Check if going offboard
+                    if (checkMovement(whereTo) != copyMovePattern[copyMoveIndex])
                     {
-                        Debug.Log("checkMovement Failed");
+                        if (checkMovement(whereTo) == "Error")
+                        {
+                            Debug.Log("checkMovement Failed");
+                        }
+                        else
+                        {
+                            //change whereTo to new direction shown in method
+                            nextMovement = checkMovement(whereTo);
+                            doMovement(nextMovement);
+                            copyMoveIndex += 1;
+                            //moveCount += 1;
+                        }
                     }
                     else
                     {
-                        //change whereTo to new direction shown in method
-                        nextMovement = checkMovement(whereTo);
+                        nextMovement = whereTo;
                         doMovement(nextMovement);
                         copyMoveIndex += 1;
+                        //moveCount += 1;
                     }
                 }
-                else
-                {
-                    nextMovement = whereTo;
+                else //If there is a tree
+                { //need to store moves towards tree to then loop back through 
+                  //undoTowardsTrees.Add(nextMovement);
                     doMovement(nextMovement);
-                    copyMoveIndex += 1;
+                    //moveCount += 1;
                 }
-            }
-            else //If there is a tree
-            { //need to store moves towards tree to then loop back through 
-                //undoTowardsTrees.Add(nextMovement);
-                doMovement(nextMovement);
-            }
-            
-            nextMovement = " ";
-            resetEyeData();
 
-            //instead, increment enemies done their turn counter
-            //if counter == max enemies then reset counter and startTurn
-            TurnManager.instance.enemyTurnsCount++;
+                nextMovement = " ";
+                resetEyeData();
+
+                
+
+                //if (moveCount >= maxMoveCount)
+                //{
+                    TurnManager.instance.enemyTurnsCount++;
+                //}
+
+            
         }
         else
         {
             //
         }
+    
     }
 
     public void setTopEyeData(int data)
@@ -180,11 +197,6 @@ public class Woodcutter : MonoBehaviour
     public void setCutterCheckOn()
     {
         cutterCheck.SetActive(true);
-
-        /*topEye.GetComponent<BoxCollider>().enabled = true;
-        leftEye.GetComponent<BoxCollider>().enabled = true;
-        rightEye.GetComponent<BoxCollider>().enabled = true;
-        bottomEye.GetComponent<BoxCollider>().enabled = true;*/
     }
 
     /// <summary>
@@ -192,11 +204,6 @@ public class Woodcutter : MonoBehaviour
     /// </summary>
     public void setCutterCheckOff()
     {
-        /*topEye.GetComponent<BoxCollider>().enabled = false;
-        leftEye.GetComponent<BoxCollider>().enabled = false;
-        rightEye.GetComponent<BoxCollider>().enabled = false;
-        bottomEye.GetComponent<BoxCollider>().enabled = false;*/
-
         cutterCheck.SetActive(false);
     }
 
@@ -214,14 +221,14 @@ public class Woodcutter : MonoBehaviour
         {
             if(copyMovePattern[copyMoveIndex] != "up")
             {
-                Debug.Log("Changing Next direction to up");
+                //Debug.Log("Changing Next direction to up");
                 nextMovement = "up";
                 setCutterCheckOff();
                 return true;
             }
             else
             {
-                Debug.Log("Tree in current path");
+                //Debug.Log("Tree in current path");
             }
             setCutterCheckOff();
             return false;
@@ -230,14 +237,14 @@ public class Woodcutter : MonoBehaviour
         {
             if (copyMovePattern[copyMoveIndex] != "right")
             {
-                Debug.Log("Changing Next direction to right");
+                //Debug.Log("Changing Next direction to right");
                 nextMovement = "right";
                 setCutterCheckOff();
                 return true;
             }
             else
             {
-                Debug.Log("Tree in current path");
+                //Debug.Log("Tree in current path");
             }
             setCutterCheckOff();
             return false;
@@ -246,14 +253,14 @@ public class Woodcutter : MonoBehaviour
         {
             if (copyMovePattern[copyMoveIndex] != "down")
             {
-                Debug.Log("Changing Next direction to down");
+                //Debug.Log("Changing Next direction to down");
                 nextMovement = "down";
                 setCutterCheckOff();
                 return true;
             }
             else
             {
-                Debug.Log("Tree in current path");
+                //Debug.Log("Tree in current path");
             }
             setCutterCheckOff();
             return false;
@@ -262,21 +269,21 @@ public class Woodcutter : MonoBehaviour
         {
             if (copyMovePattern[copyMoveIndex] != "left")
             {
-                Debug.Log("Changing Next direction to left");
+                //Debug.Log("Changing Next direction to left");
                 nextMovement = "left";
                 setCutterCheckOff();
                 return true;
             }
             else
             {
-                Debug.Log("Tree in current path");
+                //Debug.Log("Tree in current path");
             }
             setCutterCheckOff();
             return false;
         }
         else
         {           
-            Debug.Log("No Trees around this Woodcutter");
+            //Debug.Log("No Trees around this Woodcutter");
             setCutterCheckOff();
             return false;
         }
@@ -326,26 +333,6 @@ public class Woodcutter : MonoBehaviour
         }
 
     }
-
-    // Update with some Debugging features commented out
-    void Update()
-    {
-        //throw away if statement after further logic is introduced
-        /*
-        if (Input.GetKeyDown("space"))
-        {
-            //
-            cutterCheck.SetActive(true);
-        }
-
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            //
-            cutterCheck.SetActive(false);
-        }*/
-
-    }
-
 
     /// <summary>
     /// Checks to make sure the player is not walking off the board if they walk in (param) "Direction", returns correct movement

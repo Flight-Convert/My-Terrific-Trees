@@ -2,7 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+/*
+* Wolfgang Gross
+* Group Project - My Terrific Trees
+* Checks attached to 'Eye's of Woodcutter
+* --
+*/
 
 public class CheckMove : MonoBehaviour
 {

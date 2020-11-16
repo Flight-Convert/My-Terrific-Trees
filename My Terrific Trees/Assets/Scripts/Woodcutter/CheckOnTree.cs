@@ -2,7 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+/*
+* Wolfgang Gross
+* Group Project - My Terrific Trees
+* Check attached to Woodcutter hitbox to check if on a tree
+* --
+*/
 
 public class CheckOnTree : MonoBehaviour
 {
