@@ -17,8 +17,8 @@ public class GameManager : MonoBehaviour
 
     public bool ended;
     public bool won;
-    public float targetScore = 20;
-    public float score = 0;
+    public float targetScore;
+    public float score;
 
     #region Singleton code
     public static GameManager instance;
@@ -43,10 +43,12 @@ public class GameManager : MonoBehaviour
     {
         ended = false;
         won = false;
+        score = 0;
+        targetScore = 20;
         treeCheck = GameObject.FindGameObjectWithTag("TreeCheck").GetComponent<CheckTreeCount>();
         endText = GameObject.FindGameObjectWithTag("EndText").GetComponent<Text>();
         scoreText = GameObject.FindGameObjectWithTag("ScoreText").GetComponent<Text>();
-        endText.gameObject.SetActive(false);
+        endText.text = "";
     }
 
     void Update()
@@ -65,7 +67,7 @@ public class GameManager : MonoBehaviour
         }
         if (ended)
         {
-            endText.gameObject.SetActive(true);
+            //endText.gameObject.SetActive(true);
             if (won)
             {
                 endText.text = "You Won!\nPress R To Restart";
@@ -76,11 +78,6 @@ public class GameManager : MonoBehaviour
             }
             if(Input.GetKeyDown(KeyCode.R))
             {
-                ended = false;
-                won = false;
-                targetScore = 20;
-                score = 0;
-
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
         }
