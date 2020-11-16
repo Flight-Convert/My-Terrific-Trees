@@ -14,23 +14,24 @@ public class Woodcutter : MonoBehaviour
 {
     //Set this from the inspector
     public string[] movePatternList; //Don't affect this list, use copy to manipulate vvv
-    public string[] copyMovePattern;// Affect ME
+    private string[] copyMovePattern;// Affect ME
     //List<string> undoTowardsTrees = new List<string>();
     
-    public int copyMoveIndex = 0; //Where in list we are
+    private int copyMoveIndex = 0; //Where in list we are
     private int patternListLength;
 
     //public bool readyToMove = false;
 
     public Rigidbody cutterRB;
+    public GameObject cutterCheck;
     //public Rigidbody checkRB;
 
     //public string initialMovement;
-    public string currentMovement;
-    public string previousMovement;
-    public string nextMovement = "";
+    private string currentMovement;
+    private string previousMovement;
+    private string nextMovement = "";
 
-    public string goingDirection;
+    //public string goingDirection;
 
     public bool onBoard = false;
 
@@ -44,10 +45,10 @@ public class Woodcutter : MonoBehaviour
     public GameObject rightEye;
     public GameObject bottomEye;
 
-    CheckMove checkMoveUp;
-    CheckMove checkMoveLeft;
-    CheckMove checkMoveRight;
-    CheckMove checkMoveDown;
+    private CheckMove checkMoveUp;
+    private CheckMove checkMoveLeft;
+    private CheckMove checkMoveRight;
+    private CheckMove checkMoveDown;
 
     // Shows what is on this 'eye's tile, 0 - nothing here, 1 - tree here, 2 - off the board
     /// <summary>
@@ -67,9 +68,7 @@ public class Woodcutter : MonoBehaviour
     /// </summary>
     public int bottomEyeData = 0;    
 
-    public Vector3 currentLocation;
-
-    public GameObject cutterCheck;
+    
 
     // Start is called before the first frame update
     void Start()
