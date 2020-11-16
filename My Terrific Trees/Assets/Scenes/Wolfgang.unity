@@ -2217,13 +2217,8 @@ MonoBehaviour:
   - left
   - up
   - up
-  copyMovePattern: []
-  copyMoveIndex: 0
   cutterRB: {fileID: 251602200}
-  currentMovement: 
-  previousMovement: 
-  nextMovement: 
-  goingDirection: 
+  cutterCheck: {fileID: 2058735483}
   onBoard: 1
   topEye: {fileID: 2058735487}
   leftEye: {fileID: 2058735486}
@@ -2233,8 +2228,6 @@ MonoBehaviour:
   leftEyeData: 0
   rightEyeData: 0
   bottomEyeData: 0
-  currentLocation: {x: 0, y: 0, z: 0}
-  cutterCheck: {fileID: 2058735483}
 --- !u!54 &251602200
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4424,13 +4417,8 @@ MonoBehaviour:
   - right
   - right
   - right
-  copyMovePattern: []
-  copyMoveIndex: 0
   cutterRB: {fileID: 502393353}
-  currentMovement: 
-  previousMovement: 
-  nextMovement: 
-  goingDirection: 
+  cutterCheck: {fileID: 695643486}
   onBoard: 1
   topEye: {fileID: 1909621205}
   leftEye: {fileID: 614860468}
@@ -4440,8 +4428,6 @@ MonoBehaviour:
   leftEyeData: 0
   rightEyeData: 0
   bottomEyeData: 0
-  currentLocation: {x: 0, y: 0, z: 0}
-  cutterCheck: {fileID: 695643486}
 --- !u!54 &502393353
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -8085,11 +8071,11 @@ GameObject:
   - component: {fileID: 845655924}
   m_Layer: 5
   m_Name: EndText
-  m_TagString: Untagged
+  m_TagString: EndText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &845655923
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12041,7 +12027,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   treePrefab: {fileID: 7703706539017720594, guid: 400c23db7e3094c45a9083337228074f, type: 3}
   remainingTrees: 20
-  treeCountText: {fileID: 0}
+  treeCountText: {fileID: 563863445}
   boardSize: {x: 10, y: 10}
 --- !u!4 &1317578434
 Transform:
@@ -12654,7 +12640,7 @@ GameObject:
   - component: {fileID: 1401980371}
   m_Layer: 5
   m_Name: CO2Text
-  m_TagString: Untagged
+  m_TagString: ScoreText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15825,9 +15811,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de5de09ba8a94424c94997db551398fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endText: {fileID: 845655924}
-  scoreText: {fileID: 1401980371}
-  treeCheck: {fileID: 1921218915}
   ended: 0
   won: 0
   targetScore: 20
@@ -18802,13 +18785,8 @@ MonoBehaviour:
   - right
   - right
   - right
-  copyMovePattern: []
-  copyMoveIndex: 0
   cutterRB: {fileID: 2075972208}
-  currentMovement: 
-  previousMovement: 
-  nextMovement: 
-  goingDirection: 
+  cutterCheck: {fileID: 58882521}
   onBoard: 1
   topEye: {fileID: 58882525}
   leftEye: {fileID: 58882524}
@@ -18818,8 +18796,6 @@ MonoBehaviour:
   leftEyeData: 0
   rightEyeData: 0
   bottomEyeData: 0
-  currentLocation: {x: 0, y: 0, z: 0}
-  cutterCheck: {fileID: 58882521}
 --- !u!54 &2075972208
 Rigidbody:
   m_ObjectHideFlags: 0
