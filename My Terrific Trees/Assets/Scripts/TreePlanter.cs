@@ -36,7 +36,11 @@ public class TreePlanter : MonoBehaviour
                 //Debug.Log("mouseTile Coords at plant: " + mouseTile);
             }
             else
+            {
                 Debug.Log("You are out of trees!");
+                GameManager.instance.ended = true;
+            }
+                
         }
 
         if (treeCountText != null)

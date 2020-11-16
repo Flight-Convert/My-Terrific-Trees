@@ -55,7 +55,7 @@ public class CheckMove : MonoBehaviour
 
         if (other.name == "Small Tree(Clone)")
         {
-            Debug.Log("Eye '" + whichSide + "' hit a triggerzone!: " + other.name);
+            //Debug.Log("Eye '" + whichSide + "' hit a triggerzone!: " + other.name);
             if (whichSide == "Eye Up")
             {
                 whatsHere = "tree";
@@ -79,7 +79,7 @@ public class CheckMove : MonoBehaviour
         }
         if (other.name == "Big Tree(Clone)")
         {
-            Debug.Log("Eye '" + whichSide + "' hit a triggerzone!: " + other.name);
+            //Debug.Log("Eye '" + whichSide + "' hit a triggerzone!: " + other.name);
             if (whichSide == "Eye Up")
             {
                 whatsHere = "tree";
@@ -104,7 +104,7 @@ public class CheckMove : MonoBehaviour
 
         else if (other.name == "Outer Edge") 
         {
-            Debug.Log("Eye '" + whichSide + "' hit a triggerzone!: " + other.name);
+            //Debug.Log("Eye '" + whichSide + "' hit a triggerzone!: " + other.name);
             if (whichSide == "Eye Up")
             {
                 whatsHere = "OffBoard";

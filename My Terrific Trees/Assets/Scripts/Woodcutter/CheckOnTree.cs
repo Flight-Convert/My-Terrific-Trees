@@ -41,7 +41,7 @@ public class CheckOnTree : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Woodcutter Stepped on a triggerzone!: " + other.name);
+        //Debug.Log("Woodcutter Stepped on a triggerzone!: " + other.name);
         /*if (other.gameObject.CompareTag("Edge"))
         {
             woodCutter.onBoard = true;
