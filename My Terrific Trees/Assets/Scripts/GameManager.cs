@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
             treeCheck = GameObject.FindGameObjectWithTag("TreeCheck").GetComponent<CheckTreeCount>();
             endText = GameObject.FindGameObjectWithTag("EndText").GetComponent<Text>();
             scoreText = GameObject.FindGameObjectWithTag("ScoreText").GetComponent<Text>();
-            endText.gameObject.SetActive(false);
+            //endText.gameObject.SetActive(false);
         }
         if(score >= targetScore && ended != true)
         {
@@ -78,6 +78,8 @@ public class GameManager : MonoBehaviour
             }
             if(Input.GetKeyDown(KeyCode.R))
             {
+                score = 0;
+                targetScore = 20;
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
         }
