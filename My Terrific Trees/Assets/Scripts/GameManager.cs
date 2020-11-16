@@ -15,8 +15,8 @@ public class GameManager : MonoBehaviour
     private Text scoreText;
     private CheckTreeCount treeCheck;
 
-    public bool ended = false;
-    public bool won = false;
+    public bool ended;
+    public bool won;
     public float targetScore = 20;
     public float score = 0;
 
@@ -41,6 +41,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        ended = false;
+        won = false;
         treeCheck = GameObject.FindGameObjectWithTag("TreeCheck").GetComponent<CheckTreeCount>();
         endText = GameObject.FindGameObjectWithTag("EndText").GetComponent<Text>();
         scoreText = GameObject.FindGameObjectWithTag("ScoreText").GetComponent<Text>();
