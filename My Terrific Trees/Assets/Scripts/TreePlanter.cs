@@ -54,7 +54,8 @@ public class TreePlanter : MonoBehaviour
         if (tileCoordinates.y <= -boardSize.y / 2 || tileCoordinates.y > boardSize.y / 2) return;
 
         /// Check if tree is already planted at this spot
-        if (true) 
+        Collider[] collidedObjects = Physics.OverlapSphere(new Vector3(tileCoordinates.x, 0, tileCoordinates.y), 0.1f, LayerMask.GetMask("Blocker"));
+        if (collidedObjects.Length == 0) 
         {
             /// Plant the tree
             Instantiate(treePrefab, new Vector3(tileCoordinates.x, 0, tileCoordinates.y), treePrefab.transform.rotation);
