@@ -28,13 +28,13 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
             Debug.LogError("Trying to instantiate a second" +
-                "instance of singleton Turn Manager");
+                "instance of singleton Game Manager");
         }
     }
     #endregion
