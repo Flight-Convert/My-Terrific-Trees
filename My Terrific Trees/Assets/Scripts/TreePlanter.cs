@@ -25,6 +25,7 @@ public class TreePlanter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.instance.ended) return;
         if (Input.GetMouseButtonDown(0))
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -10));
