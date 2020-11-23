@@ -114,7 +114,7 @@ public class Woodcutter : MonoBehaviour
 
                 string whereTo = copyMovePattern[copyMoveIndex];
 
-                //To be fixed later
+                //Possible implementation for different woodcutter phase
                 /*if (undoTowardsTrees.Count > 0)
                 {
                     doReverseMovement(undoTowardsTrees[0]);
@@ -158,14 +158,10 @@ public class Woodcutter : MonoBehaviour
                 nextMovement = " ";
                 resetEyeData();
 
-                
-
                 //if (moveCount >= maxMoveCount)
                 //{
                     TurnManager.instance.enemyTurnsCount++;
-                //}
-
-            
+                //}         
         }
         else
         {
