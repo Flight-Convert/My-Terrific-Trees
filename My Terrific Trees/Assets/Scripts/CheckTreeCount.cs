@@ -11,10 +11,11 @@ using UnityEngine;
 public class CheckTreeCount : MonoBehaviour
 {
     TreePlanter tp;
-    [HideInInspector]public bool lost = false;
+    [HideInInspector]public bool lost;
 
     private void Start()
     {
+        lost = false;
         tp = FindObjectOfType<TreePlanter>();
         if (tp == null) Debug.LogWarning("There is no tree planter in the scene.");
     }

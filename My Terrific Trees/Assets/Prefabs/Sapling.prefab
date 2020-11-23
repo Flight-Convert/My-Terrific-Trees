@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 8407459750174007633}
   - component: {fileID: -6556749639343935988}
   - component: {fileID: 787894376307516154}
-  m_Layer: 0
+  - component: {fileID: -4833588414728410752}
+  m_Layer: 8
   m_Name: Sapling
   m_TagString: Sapling
   m_Icon: {fileID: 0}
@@ -211,3 +212,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!65 &-4833588414728410752
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7703706539017720594}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.24441421, y: 0.26986414, z: 0.6311517}
+  m_Center: {x: -0.00052009523, y: -0.009397656, z: 0.21557584}

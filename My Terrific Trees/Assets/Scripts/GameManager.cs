@@ -15,10 +15,10 @@ public class GameManager : MonoBehaviour
     private Text scoreText;
     private CheckTreeCount treeCheck;
 
-    public bool ended = false;
-    public bool won = false;
-    public float targetScore = 20;
-    public float score = 0;
+    public bool ended;
+    public bool won;
+    public float targetScore;
+    public float score;
 
     #region Singleton code
     public static GameManager instance;
@@ -28,23 +28,27 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
             Debug.LogError("Trying to instantiate a second" +
-                "instance of singleton Turn Manager");
+                "instance of singleton Game Manager");
         }
     }
     #endregion
 
     void Start()
     {
+        ended = false;
+        won = false;
+        score = 0;
+        targetScore = 20;
         treeCheck = GameObject.FindGameObjectWithTag("TreeCheck").GetComponent<CheckTreeCount>();
         endText = GameObject.FindGameObjectWithTag("EndText").GetComponent<Text>();
         scoreText = GameObject.FindGameObjectWithTag("ScoreText").GetComponent<Text>();
-        endText.gameObject.SetActive(false);
+        endText.text = "";
     }
 
     void Update()
@@ -54,7 +58,7 @@ public class GameManager : MonoBehaviour
             treeCheck = GameObject.FindGameObjectWithTag("TreeCheck").GetComponent<CheckTreeCount>();
             endText = GameObject.FindGameObjectWithTag("EndText").GetComponent<Text>();
             scoreText = GameObject.FindGameObjectWithTag("ScoreText").GetComponent<Text>();
-            endText.gameObject.SetActive(false);
+            //endText.gameObject.SetActive(false);
         }
         if(score >= targetScore && ended != true)
         {
@@ -63,7 +67,7 @@ public class GameManager : MonoBehaviour
         }
         if (ended)
         {
-            endText.gameObject.SetActive(true);
+            //endText.gameObject.SetActive(true);
             if (won)
             {
                 endText.text = "You Won!\nPress R To Restart";
@@ -74,11 +78,8 @@ public class GameManager : MonoBehaviour
             }
             if(Input.GetKeyDown(KeyCode.R))
             {
-                ended = false;
-                won = false;
-                targetScore = 20;
                 score = 0;
-
+                targetScore = 20;
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
         }
