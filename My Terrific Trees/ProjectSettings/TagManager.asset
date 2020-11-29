@@ -19,6 +19,7 @@ TagManager:
   - TreeCheck
   - EndText
   - ScoreText
+  - CarbonMeter
   layers:
   - Default
   - TransparentFX

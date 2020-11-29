@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
 {
     private Text endText;
     private Text scoreText;
+    private Image carbonMeter;
     private CheckTreeCount treeCheck;
 
     public bool ended;
@@ -48,6 +49,7 @@ public class GameManager : MonoBehaviour
         treeCheck = GameObject.FindGameObjectWithTag("TreeCheck").GetComponent<CheckTreeCount>();
         endText = GameObject.FindGameObjectWithTag("EndText").GetComponent<Text>();
         scoreText = GameObject.FindGameObjectWithTag("ScoreText").GetComponent<Text>();
+        carbonMeter = GameObject.FindGameObjectWithTag("CarbonMeter").GetComponent<Image>();
         endText.text = "";
     }
 
@@ -84,5 +86,9 @@ public class GameManager : MonoBehaviour
             }
         }
         scoreText.text = "CO2 Levels: " + (score <= targetScore ? 100 - ((score / targetScore) * 100) : 0) + "%";
+        if (score <= targetScore)
+        {
+            carbonMeter.gameObject.transform.localScale = new Vector3((100 - (score / targetScore) * 100) / 100, 1, 1);
+        }
     }
 }
