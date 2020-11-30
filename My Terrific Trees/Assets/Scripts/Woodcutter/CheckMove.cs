@@ -102,7 +102,7 @@ public class CheckMove : MonoBehaviour
             }
         }
 
-        else if (other.name == "Outer Edge") 
+        else if (other.name == "Outer Edge" || other.gameObject.tag == "Block")
         {
             //Debug.Log("Eye '" + whichSide + "' hit a triggerzone!: " + other.name);
             if (whichSide == "Eye Up")
