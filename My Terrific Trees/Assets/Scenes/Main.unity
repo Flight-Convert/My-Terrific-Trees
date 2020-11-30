@@ -1770,8 +1770,8 @@ GameObject:
   - component: {fileID: 259444359}
   - component: {fileID: 259444358}
   m_Layer: 5
-  m_Name: CO2 Meter
-  m_TagString: CarbonMeter
+  m_Name: CO2 Meter Background
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6544,8 +6544,8 @@ GameObject:
   - component: {fileID: 994409144}
   - component: {fileID: 994409143}
   m_Layer: 5
-  m_Name: Image
-  m_TagString: Untagged
+  m_Name: CO2 Meter
+  m_TagString: CarbonMeter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
