@@ -25,8 +25,9 @@ public class CheckOnTree : MonoBehaviour
     /// <summary>
     /// How many moves a Woodcutter gets each turn, over equivalent rounds
     /// </summary>
-    //public int movementLevel; //change to reference from woodcutter class
-
+    /// 
+    public int logCount_UpgradeMax = 2;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -51,7 +52,7 @@ public class CheckOnTree : MonoBehaviour
             woodCutter.onBoard = true;
         }
      
-        if(logCount >= 2)
+        if(logCount >= logCount_UpgradeMax)
         {
             logCount = 0;
             woodCutter.increment_MovementLevel();
