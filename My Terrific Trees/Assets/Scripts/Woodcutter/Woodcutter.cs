@@ -87,13 +87,15 @@ public class Woodcutter : MonoBehaviour
         {
             movementLevel = 1;
         }
+
+        checkAgainstMaxRounds(movementLevel);
         /*//If larger than maxRounds, increment maxRounds to match movementLevel
         if(movementLevel > TurnManager.instance.round_maxRounds)
         {
             int temp = movementLevel - TurnManager.instance.round_maxRounds;
             TurnManager.instance.increment_MaxRounds(temp);
         }*/
-        
+
     }
 
     private void FixedUpdate()
