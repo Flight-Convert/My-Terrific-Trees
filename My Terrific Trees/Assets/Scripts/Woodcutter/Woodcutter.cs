@@ -69,13 +69,31 @@ public class Woodcutter : MonoBehaviour
     /// <summary>
     /// Variable updated each turn that gets data of whats at Bottom Triggerzone of Woodcutter Check
     /// </summary>
-    public int bottomEyeData = 0;    
+    public int bottomEyeData = 0;
+
+    private int localCurrentRound = 0; //nonfunctional at 0
+    public int movementLevel;
+    public bool movedThisRound = false;
+
                                     
     // Start is called before the first frame update
     void Start()
     {
         copyMovePattern = movePatternList;
         patternListLength = movePatternList.Length;
+
+        //Instantiate movementLevel if not already
+        if (movementLevel <= 0)
+        {
+            movementLevel = 1;
+        }
+        /*//If larger than maxRounds, increment maxRounds to match movementLevel
+        if(movementLevel > TurnManager.instance.round_maxRounds)
+        {
+            int temp = movementLevel - TurnManager.instance.round_maxRounds;
+            TurnManager.instance.increment_MaxRounds(temp);
+        }*/
+        
     }
 
     private void FixedUpdate()
@@ -83,6 +101,11 @@ public class Woodcutter : MonoBehaviour
         /*if(TurnManager.instance.isPlayerTurn)
         {
             moveCount = 0;
+        }*/
+        
+        /*if(movedThisRound) //make occur WHERE it moves during the round
+        {
+            TurnManager.instance.round_enemyMoves++;
         }*/
 
         //*Debug Display of what the eye check is seeing
@@ -98,28 +121,31 @@ public class Woodcutter : MonoBehaviour
             doReverseMovement(previousMovement);
         }
 
-        //checkForTrees();
         setCutterCheckOn();
 
-        //If on board and ready to move
-        if (!TurnManager.instance.isPlayerTurn /*&& moveCount <= maxMoveCount*/)
+        //Check localCurrentRound versus TurnManager currentRound
+        //If <, means new round started, reset hasMovedThisRound
+        if(localCurrentRound < TurnManager.instance.round_currentRound)
         {
-            
-                
-             //Figure out Movement First
-             if (copyMoveIndex == patternListLength)
-             {
-                copyMoveIndex = 0;
-             }
+            movedThisRound = false;
+        }
+
+
+        //If its not the player turn
+        /*!TurnManager.instance.isPlayerTurn*/ 
+        if (TurnManager.instance.round_currentRound > 0 && !movedThisRound)
+        {
+            //If movementLevel is greater than or equal to current round, do rest of code
+            if(movementLevel >= TurnManager.instance.round_currentRound)
+            {
+                //bunch o code here
+                //Figure out Movement First
+                if (copyMoveIndex == patternListLength)
+                {
+                    copyMoveIndex = 0;
+                }
 
                 string whereTo = copyMovePattern[copyMoveIndex];
-
-                //Possible implementation for different woodcutter phase
-                /*if (undoTowardsTrees.Count > 0)
-                {
-                    doReverseMovement(undoTowardsTrees[0]);
-                    undoTowardsTrees.RemoveAt(0);
-                }*/
 
                 //If no trees around or one is in the woodcutter's path already
                 if (checkForTrees() == false)
@@ -158,10 +184,19 @@ public class Woodcutter : MonoBehaviour
                 nextMovement = " ";
                 resetEyeData();
 
-                //if (moveCount >= maxMoveCount)
-                //{
-                    TurnManager.instance.enemyTurnsCount++;
-                //}         
+                //After bunch o code
+                movedThisRound = true;
+                
+                TurnManager.instance.increment_EnemyMoves();
+            }
+            //Else say that you have taken your action for the round
+            else
+            {
+                //Do nothing and update
+                movedThisRound = true;
+                TurnManager.instance.increment_EnemyMoves();
+            }
+                      
         }
         else
         {
@@ -169,6 +204,27 @@ public class Woodcutter : MonoBehaviour
         }
     
     }
+
+    public void increment_MovementLevel()
+    {
+        movementLevel++;
+        Debug.Log("Incremented Woodcutter Movement Level to: " + movementLevel);
+
+        //Check with TurnManager if new movementLevel is higher than current MaxRounds
+        checkAgainstMaxRounds(movementLevel);
+    }
+
+    private void checkAgainstMaxRounds(int level)
+    {
+        if(level > TurnManager.instance.round_maxRounds)
+        { 
+            //TurnManager.instance.increment_MaxRounds(1);
+            int temp = level - TurnManager.instance.round_maxRounds;
+            TurnManager.instance.increment_MaxRounds(temp);
+
+        }
+    }
+
 
     public void setTopEyeData(int data)
     {

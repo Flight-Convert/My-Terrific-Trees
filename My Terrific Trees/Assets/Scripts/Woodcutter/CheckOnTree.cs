@@ -11,16 +11,30 @@ using UnityEngine;
 
 public class CheckOnTree : MonoBehaviour
 {
-    public Woodcutter woodCutter;
+    public Woodcutter woodCutter; 
 
     public int outsideCounter = 0;
 
     AudioSource audioSource;
     public AudioClip chainsawAudio;
 
+    /// <summary>
+    /// How many trees a woodcutter has chopped until they level_UP. reset at reaching 2
+    /// </summary>
+    public int logCount = 0;
+    /// <summary>
+    /// How many moves a Woodcutter gets each turn, over equivalent rounds
+    /// </summary>
+    //public int movementLevel; //change to reference from woodcutter class
+
     // Start is called before the first frame update
     void Start()
     {
+        /*if(movementLevel <= 0) //do this where instantiated ref -> movementLevel from (woodcutter)
+        {
+            movementLevel = 1;
+        }*/
+
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -36,37 +50,36 @@ public class CheckOnTree : MonoBehaviour
         {
             woodCutter.onBoard = true;
         }
-        
+     
+        if(logCount >= 2)
+        {
+            logCount = 0;
+            woodCutter.increment_MovementLevel();
+            //woodCutter.movementLevel++;
+            //movementLevel += 1;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         //Debug.Log("Woodcutter Stepped on a triggerzone!: " + other.name);
-        /*if (other.gameObject.CompareTag("Edge"))
-        {
-            woodCutter.onBoard = true;
-            //onBoard = true;
-        }
-
-        if (other.gameObject.CompareTag("Outside"))
-        {
-            woodCutter.onBoard = false;
-            outsideCounter++;
-            
-        }*/
 
         //if woodcutter directly walks on tree, destroy tree
 
         if (other.name == "Small Tree(Clone)")
         {
+
             Destroy(other.gameObject);
+            logCount += 1;
             audioSource.PlayOneShot(chainsawAudio, 0.25f);
             GameManager.instance.score -= 2;
         }
 
         if (other.name == "Big Tree(Clone)")
         {
+
             Destroy(other.gameObject);
+            logCount += 1;
             audioSource.PlayOneShot(chainsawAudio, 0.25f);
             GameManager.instance.score -= 3;
         }
