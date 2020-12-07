@@ -15,11 +15,18 @@ public class GameManager : MonoBehaviour
     private Text scoreText;
     private Image carbonMeter;
     private CheckTreeCount treeCheck;
+    private AudioSource music;
 
     public bool ended;
     public bool won;
     public float targetScore;
     public float score;
+
+    public AudioClip music1;
+    public AudioClip music2;
+    public AudioClip music3;
+    public AudioClip music4;
+    public AudioClip music5;
 
     #region Singleton code
     public static GameManager instance;
@@ -46,6 +53,7 @@ public class GameManager : MonoBehaviour
         won = false;
         score = 0;
         targetScore = 20;
+        music = GetComponent<AudioSource>();
         treeCheck = GameObject.FindGameObjectWithTag("TreeCheck").GetComponent<CheckTreeCount>();
         endText = GameObject.FindGameObjectWithTag("EndText").GetComponent<Text>();
         scoreText = GameObject.FindGameObjectWithTag("ScoreText").GetComponent<Text>();
@@ -104,6 +112,33 @@ public class GameManager : MonoBehaviour
                 }
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
+        }
+        int timeIndex = music.timeSamples;
+        AudioClip newClip;
+        if (1 - (score / targetScore) >= 0.8)
+        {
+            newClip = music1;
+        }
+        else if (1 - (score / targetScore) >= 0.6)
+        {
+            newClip = music2;
+        }
+        else if (1 - (score / targetScore) >= 0.4)
+        {
+            newClip = music3;
+        }
+        else if (1 - (score / targetScore) >= 0.2)
+        {
+            newClip = music4;
+        }
+        else
+        {
+            newClip = music5;
+        }
+        if (!music.isPlaying)
+        {
+            music.clip = newClip;
+            music.Play();
         }
         scoreText.text = "CO2 Levels: " + (score <= targetScore ? 100 - ((score / targetScore) * 100) : 0) + "%";
         if (score <= targetScore)
