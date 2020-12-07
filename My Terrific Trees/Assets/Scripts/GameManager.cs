@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
             //endText.gameObject.SetActive(true);
             if (won)
             {
-                endText.text = "You Won!\nPress R To Restart";
+                endText.text = "You Won!\nPress R To Restart\nPress N For the Next Level";
             }
             else
             {
@@ -81,8 +81,28 @@ public class GameManager : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.R))
             {
                 score = 0;
-                targetScore = 20;
+                if(SceneManager.GetActiveScene().buildIndex != SceneManager.sceneCountInBuildSettings - 1)
+                {
+                    targetScore = 20;
+                }
+                else
+                {
+                    targetScore = 10;
+                }
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+            if (Input.GetKeyDown(KeyCode.N) && won)
+            {
+                score = 0;
+                if (SceneManager.GetActiveScene().buildIndex + 1 != SceneManager.sceneCountInBuildSettings - 1)
+                {
+                    targetScore = 20;
+                }
+                else
+                {
+                    targetScore = 10;
+                }
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
         }
         scoreText.text = "CO2 Levels: " + (score <= targetScore ? 100 - ((score / targetScore) * 100) : 0) + "%";
