@@ -11,7 +11,9 @@ using UnityEngine;
 
 public class CheckOnTree : MonoBehaviour
 {
-    public Woodcutter woodCutter; 
+    public Woodcutter woodCutter;
+
+    public GameObject stumpPrefab;
 
     public int outsideCounter = 0;
 
@@ -65,12 +67,15 @@ public class CheckOnTree : MonoBehaviour
     {
         //Debug.Log("Woodcutter Stepped on a triggerzone!: " + other.name);
 
-        //if woodcutter directly walks on tree, destroy tree
+        //if woodcutter directly walks on tree, destroy tree, Instantiate stump on destroy
 
         if (other.name == "Small Tree(Clone)")
         {
-
             Destroy(other.gameObject);
+            
+            Instantiate(stumpPrefab, new Vector3(woodCutter.gameObject.transform.position.x, woodCutter.gameObject.transform.position.y,
+                woodCutter.gameObject.transform.position.z), stumpPrefab.transform.rotation);
+
             logCount += 1;
             audioSource.PlayOneShot(chainsawAudio, 0.25f);
             GameManager.instance.score -= 2;
@@ -78,8 +83,11 @@ public class CheckOnTree : MonoBehaviour
 
         if (other.name == "Big Tree(Clone)")
         {
-
             Destroy(other.gameObject);
+
+            Instantiate(stumpPrefab, new Vector3(woodCutter.gameObject.transform.position.x, woodCutter.gameObject.transform.position.y, 
+                woodCutter.gameObject.transform.position.z), stumpPrefab.transform.rotation);
+
             logCount += 1;
             audioSource.PlayOneShot(chainsawAudio, 0.25f);
             GameManager.instance.score -= 3;
