@@ -5507,6 +5507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   woodCutter: {fileID: 192637388}
+  stumpPrefab: {fileID: 7703706539017720594, guid: c5446f60bc4f05346b00411cae0a4ffe, type: 3}
   outsideCounter: 0
   chainsawAudio: {fileID: 8300000, guid: 1f89b8c5252911a478ec0fb4105b657f, type: 3}
   logCount: 0
