@@ -40,14 +40,13 @@ public class CheckMove : MonoBehaviour
         return whichSide;
     }
 
-    public void resetWhatsHere()
+    /*public void resetWhatsHere()
     {
-        /*woodcutter.topEyeData = 0;
+        woodcutter.topEyeData = 0;
         woodcutter.leftEyeData = 0;
         woodcutter.rightEyeData = 0;
         woodcutter.bottomEyeData = 0;
-    */
-    }
+    }*/
 
     private void OnTriggerEnter(Collider other)
     {
@@ -102,7 +101,7 @@ public class CheckMove : MonoBehaviour
             }
         }
 
-        else if (other.name == "Outer Edge" || other.gameObject.tag == "Block")
+        else if (other.name == "Outer Edge" || other.name == "Block")
         {
             //Debug.Log("Eye '" + whichSide + "' hit a triggerzone!: " + other.name);
             if (whichSide == "Eye Up")
